@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>../../StyleCop.Analyzers.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="../../stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.1-beta.61">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\CasinoReports.Core.Services.Abstractions\CasinoReports.Core.Services.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Core\CasinoReports.Core.Services\CasinoReports.Core.Services.csproj" />
+    <ProjectReference Include="..\Data\CasinoReports.Infrastructure.Data.Abstractions\CasinoReports.Infrastructure.Data.Abstractions.csproj" />
+    <ProjectReference Include="..\Data\CasinoReports.Infrastructure.Data\CasinoReports.Infrastructure.Data.csproj" />
+  </ItemGroup>
+
+</Project>
