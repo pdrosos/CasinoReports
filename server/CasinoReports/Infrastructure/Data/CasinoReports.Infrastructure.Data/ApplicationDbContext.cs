@@ -13,7 +13,7 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata;
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
     {
         private static readonly MethodInfo SetIsDeletedQueryFilterMethod = typeof(ApplicationDbContext).GetMethod(
             nameof(SetIsDeletedQueryFilter),
@@ -23,6 +23,10 @@
             : base(options)
         {
         }
+
+        public DbSet<Casino> Casinos { get; set; }
+
+        public DbSet<CustomerVisitsCollection> CustomerVisitsCollections { get; set; }
 
         public override int SaveChanges()
         {
@@ -50,15 +54,15 @@
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Needed for Identity models configuration
-            base.OnModelCreating(builder);
+            base.OnModelCreating(modelBuilder);
 
             // Configure indexes
-            EntityIndexesConfiguration.Configure(builder);
+            EntityIndexesConfiguration.Configure(modelBuilder);
 
-            List<IMutableEntityType> entityTypes = builder.Model.GetEntityTypes().ToList();
+            List<IMutableEntityType> entityTypes = modelBuilder.Model.GetEntityTypes().ToList();
 
             // Set global query filter for not deleted entities only
             IEnumerable<IMutableEntityType> deletableEntityTypes = entityTypes
@@ -66,7 +70,7 @@
             foreach (var deletableEntityType in deletableEntityTypes)
             {
                 MethodInfo method = SetIsDeletedQueryFilterMethod.MakeGenericMethod(deletableEntityType.ClrType);
-                method.Invoke(null, new object[] { builder });
+                method.Invoke(null, new object[] { modelBuilder });
             }
         }
 

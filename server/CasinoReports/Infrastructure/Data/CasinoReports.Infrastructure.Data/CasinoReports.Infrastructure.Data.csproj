@@ -37,6 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Migrations\" />
     <Folder Include="Migrations\IdentityServer\ConfigurationDb\" />
     <Folder Include="Migrations\IdentityServer\PersistedGrantDb\" />
   </ItemGroup>

@@ -121,7 +121,7 @@
 
         private IQueryable<TEntity> ApplySpecification(IQuerySpecification<TEntity> spec)
         {
-            return SpecificationEvaluator<TEntity>.GetQuery(this.DbSet, spec);
+            return QuerySpecificationEvaluator<TEntity>.GetQuery(this.DbSet, spec);
         }
     }
 }

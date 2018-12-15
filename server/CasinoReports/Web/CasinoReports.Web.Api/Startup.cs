@@ -4,6 +4,7 @@
 
     using CasinoReports.Core.Models.Entities;
     using CasinoReports.Infrastructure.Data;
+    using CasinoReports.Infrastructure.Data.Seed;
     using CasinoReports.Infrastructure.Di;
 
     using IdentityServer4.EntityFramework.DbContexts;
@@ -40,7 +41,7 @@
 
             services.AddApplicationServices(this.Configuration);
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders()
                 .AddDefaultUI();
@@ -77,6 +78,7 @@
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             this.SeedIdentityServer4Database(app);
+            this.SeedApplicationDatabase(app);
 
             if (env.IsDevelopment())
             {
@@ -108,40 +110,55 @@
         {
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
-                serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
+                /*
+                var persistedGrantDbContext = serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>();
+                persistedGrantDbContext.Database.Migrate();
+                */
 
-                var context = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
+                var configurationDbContext = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
+                /* configurationDbContext.Database.Migrate(); */
 
-                // context.Database.Migrate();
-                if (!context.Clients.Any())
+                if (!configurationDbContext.Clients.Any())
                 {
                     foreach (var client in IdentityServer4Config.GetClients())
                     {
-                        context.Clients.Add(client.ToEntity());
+                        configurationDbContext.Clients.Add(client.ToEntity());
                     }
 
-                    context.SaveChanges();
+                    configurationDbContext.SaveChanges();
                 }
 
-                if (!context.IdentityResources.Any())
+                if (!configurationDbContext.IdentityResources.Any())
                 {
                     foreach (var resource in IdentityServer4Config.GetIdentityResources())
                     {
-                        context.IdentityResources.Add(resource.ToEntity());
+                        configurationDbContext.IdentityResources.Add(resource.ToEntity());
                     }
 
-                    context.SaveChanges();
+                    configurationDbContext.SaveChanges();
                 }
 
-                if (!context.ApiResources.Any())
+                if (!configurationDbContext.ApiResources.Any())
                 {
                     foreach (var resource in IdentityServer4Config.GetApiResources())
                     {
-                        context.ApiResources.Add(resource.ToEntity());
+                        configurationDbContext.ApiResources.Add(resource.ToEntity());
                     }
 
-                    context.SaveChanges();
+                    configurationDbContext.SaveChanges();
                 }
+            }
+        }
+
+        private void SeedApplicationDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var applicationDbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+                var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
+
+                DatabaseInitializer.SeedDatabase(applicationDbContext, userManager, roleManager);
             }
         }
     }

@@ -1,12 +1,10 @@
-﻿namespace CasinoReports.Infrastructure.Data
+﻿namespace CasinoReports.Core.Specifications.Query
 {
     using System.Linq;
 
-    using CasinoReports.Core.Specifications.Query;
-
     using Microsoft.EntityFrameworkCore;
 
-    public class SpecificationEvaluator<T>
+    public class QuerySpecificationEvaluator<T>
         where T : class
     {
         public static IQueryable<T> GetQuery(IQueryable<T> inputQuery, IQuerySpecification<T> specification)

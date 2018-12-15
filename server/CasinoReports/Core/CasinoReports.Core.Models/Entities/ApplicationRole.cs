@@ -1,34 +1,29 @@
 ﻿namespace CasinoReports.Core.Models.Entities
 {
     using System;
-    using System.Collections.Generic;
 
     using Microsoft.AspNetCore.Identity;
 
-    public class ApplicationUser : IdentityUser<Guid>, IAuditableEntity, IDeletableEntity, IEquatable<ApplicationUser>
+    public class ApplicationRole : IdentityRole<Guid>, IAuditableEntity, IDeletableEntity, IEquatable<ApplicationRole>
     {
+        public const string Administrator = "Administrator";
+
+        public const string ChiefManager = "ChiefManager";
+
+        public const string CasinoManager = "CasinoManager";
+
         private int? hashCode;
 
-        public ApplicationUser(string userName)
-            : base(userName)
+        public ApplicationRole(string name)
+            : base(name)
         {
             this.Id = Guid.NewGuid();
-
-            this.IdentityUserRoles = new HashSet<IdentityUserRole<Guid>>();
-            this.CasinoManagers = new HashSet<CasinoManager>();
-            this.CustomerVisitsCollectionUsers = new HashSet<CustomerVisitsCollectionUser>();
         }
 
-        private ApplicationUser()
+        private ApplicationRole()
         {
             // used by EF Core
         }
-
-        public ICollection<IdentityUserRole<Guid>> IdentityUserRoles { get; }
-
-        public ICollection<CasinoManager> CasinoManagers { get; }
-
-        public ICollection<CustomerVisitsCollectionUser> CustomerVisitsCollectionUsers { get; }
 
         public DateTime CreatedOn { get; set; }
 
@@ -38,7 +33,7 @@
 
         public DateTime? DeletedOn { get; set; }
 
-        public static bool operator ==(ApplicationUser first, ApplicationUser second)
+        public static bool operator ==(ApplicationRole first, ApplicationRole second)
         {
             if (ReferenceEquals(first, second))
             {
@@ -58,27 +53,12 @@
             return first.Equals(second);
         }
 
-        public static bool operator !=(ApplicationUser first, ApplicationUser second)
+        public static bool operator !=(ApplicationRole first, ApplicationRole second)
         {
             return !(first == second);
         }
 
-        public void AddIdentityUserRole(IdentityUserRole<Guid> identityUserRole)
-        {
-            if (this.IdentityUserRoles.Contains(identityUserRole))
-            {
-                return;
-            }
-
-            this.IdentityUserRoles.Add(identityUserRole);
-        }
-
-        public bool RemoveIdentityUserRole(IdentityUserRole<Guid> identityUserRole)
-        {
-            return this.IdentityUserRoles.Remove(identityUserRole);
-        }
-
-        public bool Equals(ApplicationUser other)
+        public bool Equals(ApplicationRole other)
         {
             if (ReferenceEquals(null, other))
             {
@@ -112,7 +92,7 @@
                 return false;
             }
 
-            var item = (ApplicationUser)other;
+            var item = (ApplicationRole)other;
 
             return this.Equals(item);
         }
