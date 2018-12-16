@@ -59,6 +59,8 @@
             // Needed for Identity models configuration
             base.OnModelCreating(modelBuilder);
 
+            ConfigureApplicationUserIdentityRelations(modelBuilder);
+
             // Configure indexes
             EntityIndexesConfiguration.Configure(modelBuilder);
 
@@ -72,6 +74,30 @@
                 MethodInfo method = SetIsDeletedQueryFilterMethod.MakeGenericMethod(deletableEntityType.ClrType);
                 method.Invoke(null, new object[] { modelBuilder });
             }
+        }
+
+        private static void ConfigureApplicationUserIdentityRelations(ModelBuilder builder)
+        {
+            builder.Entity<ApplicationUser>()
+                .HasMany(e => e.IdentityUserRoles)
+                .WithOne()
+                .HasForeignKey(e => e.UserId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<ApplicationUser>()
+                .HasMany(e => e.IdentityUserClaims)
+                .WithOne()
+                .HasForeignKey(e => e.UserId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<ApplicationUser>()
+                .HasMany(e => e.IdentityUserLogins)
+                .WithOne()
+                .HasForeignKey(e => e.UserId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)

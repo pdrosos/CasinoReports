@@ -5,16 +5,17 @@
     public class CustomerVisitsCollection : BaseEquatableDeletableEntity<int, CustomerVisitsCollection>
     {
         public CustomerVisitsCollection(string name)
+            : this()
         {
             this.Name = name;
-            this.CustomerVisitsCollectionCasinos = new HashSet<CustomerVisitsCollectionCasino>();
-            this.CustomerVisitsCollectionUsers = new HashSet<CustomerVisitsCollectionUser>();
-            this.CustomerVisitsImports = new List<CustomerVisitsImport>();
         }
 
         private CustomerVisitsCollection()
         {
             // used by EF Core
+            this.CustomerVisitsCollectionCasinos = new HashSet<CustomerVisitsCollectionCasino>();
+            this.CustomerVisitsCollectionUsers = new HashSet<CustomerVisitsCollectionUser>();
+            this.CustomerVisitsImports = new List<CustomerVisitsImport>();
         }
 
         public string Name { get; private set; }

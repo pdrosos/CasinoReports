@@ -6,15 +6,16 @@
     public class Casino : BaseEquatableDeletableEntity<int, Casino>
     {
         public Casino(string name)
+            : this()
         {
             this.Name = name;
-            this.CasinoManagers = new HashSet<CasinoManager>();
-            this.CustomerVisitsCollectionCasinos = new HashSet<CustomerVisitsCollectionCasino>();
         }
 
         private Casino()
         {
             // used by EF Core
+            this.CasinoManagers = new HashSet<CasinoManager>();
+            this.CustomerVisitsCollectionCasinos = new HashSet<CustomerVisitsCollectionCasino>();
         }
 
         public string Name { get; private set; }

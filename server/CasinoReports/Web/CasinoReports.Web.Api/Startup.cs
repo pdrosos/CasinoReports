@@ -77,8 +77,11 @@
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            this.SeedIdentityServer4Database(app);
-            this.SeedApplicationDatabase(app);
+            if (env.IsDevelopment())
+            {
+                this.SeedIdentityServer4Database(app);
+                this.SeedApplicationDatabase(app);
+            }
 
             if (env.IsDevelopment())
             {
@@ -110,13 +113,11 @@
         {
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
-                /*
                 var persistedGrantDbContext = serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>();
                 persistedGrantDbContext.Database.Migrate();
-                */
 
                 var configurationDbContext = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
-                /* configurationDbContext.Database.Migrate(); */
+                configurationDbContext.Database.Migrate();
 
                 if (!configurationDbContext.Clients.Any())
                 {

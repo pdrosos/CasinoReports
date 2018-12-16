@@ -2,21 +2,19 @@
 {
     using System;
 
-    public class CustomerVisits : BaseDeletableEntity
+    public class CustomerVisits : BaseEquatableDeletableEntity<long, CustomerVisits>
     {
         public CustomerVisits(CustomerVisitsImport customerVisitsImport)
         {
             this.CustomerVisitsImport = customerVisitsImport;
         }
 
-        private CustomerVisits()
+        public CustomerVisits()
         {
-            // used by EF Core
+            // used by CsvHelper and by EF Core
         }
 
-        public long Id { get; private set; }
-
-        public CustomerVisitsImport CustomerVisitsImport { get; private set; }
+        public CustomerVisitsImport CustomerVisitsImport { get; set; }
 
         public string NameFirstLast { get; set; }
 
@@ -28,7 +26,7 @@
 
         public int Visits { get; set; }
 
-        public decimal AvgBet { get; set; }
+        public decimal? AvgBet { get; set; }
 
         public string PlayerType { get; set; }
 
@@ -48,7 +46,7 @@
 
         public decimal CleanBalance { get; set; }
 
-        public decimal BonusPercentOfBet { get; set; }
+        public decimal? BonusPercentOfBet { get; set; }
 
         public decimal BonusPercentOfLose { get; set; }
 

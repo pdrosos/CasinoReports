@@ -94,15 +94,27 @@
                 var password = "Abc123=";
 
                 // create administrator
-                ApplicationUser administrator = CreateUser(userManager, "administrator", "administrator@sample.com", password);
+                ApplicationUser administrator = CreateUser(
+                    userManager,
+                    "administrator@example.com",
+                    "administrator@example.com",
+                    password);
                 AddUserToRole(userManager, administrator, ApplicationRole.Administrator);
 
                 // create chief manager
-                ApplicationUser chiefManager = CreateUser(userManager, "chiefmanager", "chiefmanager@sample.com", password);
+                ApplicationUser chiefManager = CreateUser(
+                    userManager,
+                    "chiefmanager@example.com",
+                    "chiefmanager@example.com",
+                    password);
                 AddUserToRole(userManager, chiefManager, ApplicationRole.ChiefManager);
 
                 // create casino manager
-                ApplicationUser casinoManager = CreateUser(userManager, "casinomanager", "casinomanager@sample.com", password);
+                ApplicationUser casinoManager = CreateUser(
+                    userManager,
+                    "casinomanager@example.com",
+                    "casinomanager@example.com",
+                    password);
                 AddUserToRole(userManager, casinoManager, ApplicationRole.CasinoManager);
             }
         }
@@ -151,6 +163,7 @@
         {
             var user = new ApplicationUser(userName);
             user.Email = email;
+            user.EmailConfirmed = true;
 
             IdentityResult result = userManager.CreateAsync(user, password).GetAwaiter().GetResult();
             if (!result.Succeeded)

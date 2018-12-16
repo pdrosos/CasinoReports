@@ -15,6 +15,9 @@
             this.Id = Guid.NewGuid();
 
             this.IdentityUserRoles = new HashSet<IdentityUserRole<Guid>>();
+            this.IdentityUserClaims = new HashSet<IdentityUserClaim<Guid>>();
+            this.IdentityUserLogins = new HashSet<IdentityUserLogin<Guid>>();
+
             this.CasinoManagers = new HashSet<CasinoManager>();
             this.CustomerVisitsCollectionUsers = new HashSet<CustomerVisitsCollectionUser>();
         }
@@ -22,9 +25,19 @@
         private ApplicationUser()
         {
             // used by EF Core
+            this.IdentityUserRoles = new HashSet<IdentityUserRole<Guid>>();
+            this.IdentityUserClaims = new HashSet<IdentityUserClaim<Guid>>();
+            this.IdentityUserLogins = new HashSet<IdentityUserLogin<Guid>>();
+
+            this.CasinoManagers = new HashSet<CasinoManager>();
+            this.CustomerVisitsCollectionUsers = new HashSet<CustomerVisitsCollectionUser>();
         }
 
         public ICollection<IdentityUserRole<Guid>> IdentityUserRoles { get; }
+
+        public ICollection<IdentityUserClaim<Guid>> IdentityUserClaims { get; }
+
+        public ICollection<IdentityUserLogin<Guid>> IdentityUserLogins { get; }
 
         public ICollection<CasinoManager> CasinoManagers { get; }
 

@@ -172,7 +172,7 @@ namespace CasinoReports.Infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("AvgBet");
+                    b.Property<decimal?>("AvgBet");
 
                     b.Property<decimal>("Balance");
 
@@ -182,7 +182,7 @@ namespace CasinoReports.Infrastructure.Data.Migrations
 
                     b.Property<int>("BonusFromPoints");
 
-                    b.Property<decimal>("BonusPercentOfBet");
+                    b.Property<decimal?>("BonusPercentOfBet");
 
                     b.Property<decimal>("BonusPercentOfLose");
 
@@ -406,11 +406,7 @@ namespace CasinoReports.Infrastructure.Data.Migrations
 
                     b.Property<Guid>("RoleId");
 
-                    b.Property<Guid?>("ApplicationUserId");
-
                     b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("RoleId");
 
@@ -496,34 +492,30 @@ namespace CasinoReports.Infrastructure.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.HasOne("CasinoReports.Core.Models.Entities.ApplicationUser")
-                        .WithMany()
+                        .WithMany("IdentityUserClaims")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.HasOne("CasinoReports.Core.Models.Entities.ApplicationUser")
-                        .WithMany()
+                        .WithMany("IdentityUserLogins")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("CasinoReports.Core.Models.Entities.ApplicationUser")
-                        .WithMany("IdentityUserRoles")
-                        .HasForeignKey("ApplicationUserId");
-
                     b.HasOne("CasinoReports.Core.Models.Entities.ApplicationRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("CasinoReports.Core.Models.Entities.ApplicationUser")
-                        .WithMany()
+                        .WithMany("IdentityUserRoles")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
