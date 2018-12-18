@@ -10,6 +10,8 @@
     using IdentityServer4.EntityFramework.DbContexts;
     using IdentityServer4.EntityFramework.Mappers;
 
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -32,6 +34,7 @@
         public void ConfigureServices(IServiceCollection services)
         {
             var applicationConnectionString = this.Configuration.GetConnectionString("ApplicationConnection");
+            var migrationsAssembly = typeof(ApplicationDbContext).Assembly.GetName().Name;
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -60,18 +63,64 @@
                 // this adds the config data from DB (clients, resources)
                 .AddConfigurationStore(options =>
                 {
-                    options.ConfigureDbContext = builder => builder.UseSqlServer(applicationConnectionString);
+                    options.ConfigureDbContext = builder =>
+                        builder.UseSqlServer(
+                            applicationConnectionString,
+                            b => b.MigrationsAssembly(migrationsAssembly));
                 })
 
                 // this adds the operational data from DB (codes, tokens, consents)
                 .AddOperationalStore(options =>
                 {
-                    options.ConfigureDbContext = builder => builder.UseSqlServer(applicationConnectionString);
+                    options.ConfigureDbContext = builder =>
+                        builder.UseSqlServer(
+                            applicationConnectionString,
+                            b => b.MigrationsAssembly(migrationsAssembly));
 
                     // this enables automatic token cleanup. this is optional.
                     options.EnableTokenCleanup = true;
                     options.TokenCleanupInterval = 30;
                 });
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(jwt =>
+                {
+                    jwt.Authority = "https://localhost:44300";
+                    jwt.Audience = "CasinoReportsAPI";
+                });
+
+            services.AddAuthorization(options =>
+            {
+                var defaultAuthorizationPolicyBuilder = new AuthorizationPolicyBuilder(
+                    JwtBearerDefaults.AuthenticationScheme);
+                defaultAuthorizationPolicyBuilder = defaultAuthorizationPolicyBuilder.RequireAuthenticatedUser();
+
+                options.DefaultPolicy = defaultAuthorizationPolicyBuilder.Build();
+
+                // Authorization policies
+                options.AddPolicy(AuthorizationPolicies.ManageCustomerVisitsData, policy =>
+                {
+                    policy.RequireRole(ApplicationRole.Administrator);
+                });
+
+                options.AddPolicy(AuthorizationPolicies.ManageReports, policy =>
+                {
+                    policy.RequireRole(ApplicationRole.Administrator);
+                });
+
+                options.AddPolicy(AuthorizationPolicies.AccessAllReports, policy =>
+                {
+                    policy.RequireRole(ApplicationRole.Administrator, ApplicationRole.ChiefManager);
+                });
+
+                options.AddPolicy(AuthorizationPolicies.AccessCasinoReports, policy =>
+                {
+                    policy.RequireRole(
+                        ApplicationRole.Administrator,
+                        ApplicationRole.ChiefManager,
+                        ApplicationRole.CasinoManager);
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

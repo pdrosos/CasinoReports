@@ -14,6 +14,7 @@
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .Build();
+
             var connectionString = configuration.GetConnectionString("ApplicationConnection");
 
             var builder = new DbContextOptionsBuilder<ApplicationDbContext>();

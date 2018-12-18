@@ -14,6 +14,9 @@
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
+                new IdentityResources.Email(),
+                new IdentityResources.Address(),
+                new IdentityResources.Phone(),
                 new IdentityResource("roles", new List<string> { "role" }),
             };
         }
@@ -41,19 +44,23 @@
                     ClientId = "AngularSPA",
                     ClientName = "Angular SPA Client",
                     AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
                     RequireClientSecret = false,
 
                     RequireConsent = false,
 
                     AccessTokenLifetime = 3600, // Lifetime of access token in seconds
 
-                    RedirectUris = { "http://localhost:5001/callback" },
-                    PostLogoutRedirectUris = { "http://localhost:5001/home" },
+                    RedirectUris = { "http://localhost:5001", "http://localhost:5001/silent-refresh.html" },
+                    PostLogoutRedirectUris = { "http://localhost:5001/logout" },
                     AllowedCorsOrigins = { "http://localhost:5001" },
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
+                        IdentityServerConstants.StandardScopes.Address,
+                        IdentityServerConstants.StandardScopes.Phone,
                         "roles",
                         "CasinoReportsAPI",
                     },

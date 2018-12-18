@@ -9,9 +9,12 @@
     using CasinoReports.Web.Api.Mapping;
     using CasinoReports.Web.Api.Models.CustomerVisitsImport;
     using CsvHelper;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
+    // [Authorize(Roles = ApplicationRole.Administrator)]
+    [Authorize(Policy = AuthorizationPolicies.ManageCustomerVisitsData)]
     public class CustomerVisitsImportController : BaseController
     {
         private readonly ICustomerVisitsCollectionRepository customerVisitsCollectionRepository;
