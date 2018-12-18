@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { OAuthModule } from 'angular-oauth2-oidc';
 
 import { CoreModule } from '@core/core.module';
+import { SharedModule } from '@shared/shared.module';
 
 import { AppRoutingModule } from '@app/app-routing.module';
 
@@ -31,6 +32,7 @@ import { LogoutComponent } from '@app/components/logout/logout.component';
       }
     }),
     CoreModule,
+    SharedModule,
     AppRoutingModule,
   ],
   providers: [

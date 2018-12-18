@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, mergeMap  } from 'rxjs/operators';
 
 import { OAuthService, JwksValidationHandler } from 'angular-oauth2-oidc';
 
@@ -44,9 +44,9 @@ export class AuthenticationService {
 
     this.oAuthService.events
       .pipe(filter(e => e.type === 'token_received'))
-      .subscribe(e => {
+      .pipe(mergeMap(() => this.oAuthService.loadUserProfile()))
+      .subscribe(() => {
         this.setLoggedIn();
-
         // this.oAuthService.loadUserProfile()
         //   .then((userProfile) => {
         //     // tslint:disable:no-console
@@ -102,24 +102,6 @@ export class AuthenticationService {
     }
 
     return user.roles.indexOf(role) !== -1;
-  }
-
-  public getGivenName(): null|string {
-    const claims = this.oAuthService.getIdentityClaims();
-    if (!claims) {
-      return null;
-    }
-
-    return claims['given_name'];
-  }
-
-  public getFamilyName(): null|string {
-    const claims = this.oAuthService.getIdentityClaims();
-    if (!claims) {
-      return null;
-    }
-
-    return claims['family_name'];
   }
 
   private setLoggedIn() {

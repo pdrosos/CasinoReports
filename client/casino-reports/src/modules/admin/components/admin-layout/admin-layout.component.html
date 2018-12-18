@@ -3,3 +3,40 @@
 <div>
   <router-outlet></router-outlet>
 </div>
+
+<mat-sidenav-container class="app-root" fullscreen>
+
+  <mat-sidenav #start mode="over">
+    <mat-nav-list>
+      <a *ngFor="let navigation of navigation"
+         mat-list-item routerLinkActive="active-link"
+         (click)="start.close()"
+         [routerLink]="[navigation.route]">
+        {{ navigation.name }}
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <div>
+    <mat-toolbar color="primary" class="mat-elevation-z6">
+      <mat-toolbar-row>
+        <button mat-icon-button (click)="start.open()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <div class="app-toolbar">
+          <h1>{{ title.getTitle() }}</h1>
+        </div>
+      </mat-toolbar-row>
+      <mat-toolbar-row>
+        <span class="fill-remaining-space"></span>
+        <span>Hello {{ user.name }}!&nbsp;&nbsp;</span>
+        <button mat-raised-button color="accent" (click)="logout()">Logout</button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div class="app-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+</mat-sidenav-container>
