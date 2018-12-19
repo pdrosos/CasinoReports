@@ -14,16 +14,16 @@
     {
         public static void AddApplicationServices(
             this IServiceCollection services,
-            IConfiguration configuration)
+            IConfiguration dataConfiguration)
         {
-            BindDbContexts(services, configuration);
+            BindDbContexts(services, dataConfiguration);
             BindRepositories(services);
             BindServices(services);
         }
 
-        private static void BindDbContexts(IServiceCollection services, IConfiguration configuration)
+        private static void BindDbContexts(IServiceCollection services, IConfiguration dataConfiguration)
         {
-            var applicationConnectionString = configuration.GetConnectionString("ApplicationConnection");
+            var applicationConnectionString = dataConfiguration.GetConnectionString("ApplicationConnection");
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(applicationConnectionString));

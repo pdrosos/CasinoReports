@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '@shared/material.module';
 
+import { MaterialFileInputModule } from 'ngx-material-file-input';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -13,6 +15,7 @@ import { MaterialModule } from '@shared/material.module';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    MaterialFileInputModule,
   ],
   declarations: [],
 })

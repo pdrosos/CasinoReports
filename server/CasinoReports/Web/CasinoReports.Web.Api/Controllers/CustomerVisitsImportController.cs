@@ -49,6 +49,7 @@
                 {
                     Id = c.Id,
                     Name = c.Name,
+                    CollectionId = c.CustomerVisitsCollection.Id,
                     Collection = c.CustomerVisitsCollection.Name,
                     CreatedOn = c.CreatedOn.ToLocalTime(),
                 });

@@ -5,11 +5,14 @@ import {
   MatCardModule,
   MatListModule,
   MatInputModule,
+  MatSelectModule,
   MatButtonModule,
   MatIconModule,
   MatTableModule,
+  MatSortModule,
+  MatSnackBarModule,
+  MatProgressSpinnerModule,
 } from '@angular/material';
-import { CdkTableModule } from '@angular/cdk/table';
 
 const materialModules: any[] = [
   MatSidenavModule,
@@ -17,10 +20,13 @@ const materialModules: any[] = [
   MatCardModule,
   MatListModule,
   MatInputModule,
+  MatSelectModule,
   MatButtonModule,
   MatIconModule,
   MatTableModule,
-  CdkTableModule
+  MatSortModule,
+  MatSnackBarModule,
+  MatProgressSpinnerModule,
 ];
 
 @NgModule({

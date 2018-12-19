@@ -20,6 +20,7 @@ namespace CasinoReports.Web.Api
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
                     config.SetBasePath(AppContext.BaseDirectory);
+                    config.AddJsonFile("datasettings.json", optional: false, reloadOnChange: false);
                     config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: false);
                     config.AddCommandLine(args);
                 })

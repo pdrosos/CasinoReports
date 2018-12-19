@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         .pipe(take(1))
         .subscribe((isLoggedIn: boolean) => {
           // https://github.com/manfredsteyer/angular-oauth2-oidc/issues/424
-          setTimeout(() => this.router.navigate(['/admin']), 200);
+          setTimeout(() => this.router.navigate(['/admin']), 100);
         })
     );
   }

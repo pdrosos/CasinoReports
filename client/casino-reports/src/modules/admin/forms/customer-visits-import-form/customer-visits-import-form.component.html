@@ -1,0 +1,68 @@
+<form name="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <br><br>
+
+    <mat-form-field class="full-width">
+      <mat-select placeholder="Collection *" formControlName="customerVisitsCollectionId">
+        <mat-option *ngFor="let collection of customerVisitsCollections$ | async" [value]="collection.id">
+          {{ collection.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error>
+        Collection is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input type="text" matInput formControlName="name" name="name" placeholder="Name *">
+      <mat-error *ngIf="form.get('name').hasError('required')">
+        Name is required
+      </mat-error>
+      <mat-error *ngIf="form.get('name').hasError('minlength')">
+        Name must be at least
+        {{ form.get('name').getError('minlength').requiredLength }}
+        symbols
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-icon matPrefix>attach_file</mat-icon>
+      <ngx-mat-file-input formControlName="customerVisits"
+                          placeholder="File *"
+                          valuePlaceholder="No file selected"
+                          [accept]="'.csv'">
+      </ngx-mat-file-input>
+      <mat-error *ngIf="form.get('customerVisits').hasError('required')">
+        Please select a file
+      </mat-error>
+      <mat-error *ngIf="form.get('customerVisits').hasError('maxContentSize')">
+        File size
+        ({{ form.get('customerVisits').getError('maxContentSize').actualSize | byteFormat }})
+        must not exceed
+        {{ form.get('customerVisits').getError('maxContentSize').maxSize | byteFormat }}.
+      </mat-error>
+    </mat-form-field>
+
+    <br><br>
+
+    <div *ngIf="(serverErrors$ | async).length > 0" class="has-error">
+      <div *ngFor="let error of serverErrors$ | async">
+        <small>{{ error }}</small>
+      </div>
+      <br>
+    </div>
+  </div>
+  <div>
+    <button mat-raised-button
+            color="accent"
+            type="submit"
+            class="full-width"
+            [disabled]="(uploading$ | async)">
+      Upload
+    </button>
+  </div>
+  <div *ngIf="(uploading$ | async)">
+    <br>
+    <mat-spinner></mat-spinner>
+  </div>
+</form>

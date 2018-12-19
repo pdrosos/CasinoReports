@@ -22,7 +22,14 @@
 
         [Required]
         [FileExtensions(".csv")]
-        [FileMimeTypes("text/csv")]
+        [FileMimeTypes(
+            "text/csv",
+            "text/x-csv",
+            "application/csv",
+            "application/x-csv",
+            "text/comma-separated-values",
+            "text/x-comma-separated-values",
+            "application/vnd.ms-excel")]
         [FileSize(2 * 1024 * 1024)]
         public IFormFile CustomerVisits { get; set; }
 

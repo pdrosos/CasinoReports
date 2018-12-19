@@ -16,6 +16,8 @@ export class IsInRoleGuard implements CanActivate {
     return this.authenticationService.getIsLoggedInStream().pipe(
       map((signedIn: boolean) => {
         if (!signedIn) {
+          this.router.navigate(['/']);
+
           return false;
         }
 

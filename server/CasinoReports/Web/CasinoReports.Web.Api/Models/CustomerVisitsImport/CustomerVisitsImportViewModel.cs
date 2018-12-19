@@ -8,6 +8,8 @@
 
         public string Name { get; set; }
 
+        public int CollectionId { get; set; }
+
         public string Collection { get; set; }
 
         public DateTime CreatedOn { get; set; }

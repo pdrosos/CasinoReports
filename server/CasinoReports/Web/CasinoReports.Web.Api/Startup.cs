@@ -28,7 +28,7 @@
             this.Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -82,11 +82,13 @@
                     options.TokenCleanupInterval = 30;
                 });
 
+            string jwtAuthority = this.Configuration["JwtBearerAuthentication:Authority"];
+            string jwtAudience = this.Configuration["JwtBearerAuthentication:Audience"];
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(jwt =>
                 {
-                    jwt.Authority = "https://localhost:44300";
-                    jwt.Audience = "CasinoReportsAPI";
+                    jwt.Authority = jwtAuthority;
+                    jwt.Audience = jwtAudience;
                 });
 
             services.AddAuthorization(options =>
@@ -121,6 +123,8 @@
                         ApplicationRole.CasinoManager);
                 });
             });
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -149,6 +153,10 @@
 
             // app.UseAuthentication(); // not needed, since UseIdentityServer adds the authentication middleware
             app.UseIdentityServer();
+
+            IConfigurationSection corsOriginsConfigurationSection = this.Configuration.GetSection("Cors:Origins");
+            string[] corsOrigins = corsOriginsConfigurationSection.GetChildren().ToArray().Select(c => c.Value).ToArray();
+            app.UseCors(builder => builder.WithOrigins(corsOrigins).AllowAnyHeader());
 
             app.UseMvc(routes =>
             {

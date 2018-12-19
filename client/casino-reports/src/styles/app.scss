@@ -25,7 +25,7 @@ body {
       display: inline-block;
       font-size: 24px;
       font-weight: 500;
-      margin: 8px 0px;
+      margin: 8px 0;
     }
 
     h1:after {
@@ -33,7 +33,7 @@ body {
       display: block;
       height: 1px;
       width: 40%;
-      margin: 24px 0px 10px;
+      margin: 24px 0 10px;
       background: $lightgray;
       clear: both;
     }
@@ -54,7 +54,7 @@ body {
 
       @media ($xsmall) {
         margin-left: 16px;
-        margin-right: 0px;
+        margin-right: 0;
       }
     }
   }
@@ -96,14 +96,4 @@ body {
 
 .full-width {
   width: 100%;
-}
-
-// Table container
-.table-container {
-  display: flex;
-  flex-direction: column;
-
-  .mat-table {
-    overflow: hidden;
-  }
 }

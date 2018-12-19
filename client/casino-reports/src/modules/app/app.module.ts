@@ -27,7 +27,7 @@ import { LogoutComponent } from '@app/components/logout/logout.component';
     HttpClientModule,
     OAuthModule.forRoot({
       resourceServer: {
-        allowedUrls: [appConfig.apiBaseUrl],
+        allowedUrls: [appConfig.apiUrl],
         sendAccessToken: true
       }
     }),

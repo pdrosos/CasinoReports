@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { appConfig } from '@app/configs/app.config';
 import { AuthenticatedGuard } from '@core/guards/authenticated.guard';
+import { IsInRoleGuard } from '@core/guards/is-in-role.guard';
 
 import { AdminLayoutComponent } from '@admin/components/admin-layout/admin-layout.component';
 import { DashboardComponent } from '@admin/components/dashboard/dashboard.component';
@@ -26,20 +28,34 @@ const adminRoutes = [
       },
       {
         path: 'customer-visits-imports',
-        component: CustomerVisitsImportsComponent,
-      },
-      {
-        path: 'customer-visits-imports/new',
-        component: CustomerVisitsImportComponent,
+        canActivate: [IsInRoleGuard],
+        data: {roles: [appConfig.roles.administrator]},
+        children: [
+          {
+            path: '',
+            component: CustomerVisitsImportsComponent
+          },
+          {
+            path: 'new',
+            component: CustomerVisitsImportComponent,
+          }
+        ]
       },
       {
         path: 'customer-visits-reports',
-        component: CustomerVisitsReportsComponent,
+        canActivate: [IsInRoleGuard],
+        data: {roles: [appConfig.roles.administrator]},
+        children: [
+          {
+            path: '',
+            component: CustomerVisitsReportsComponent
+          },
+          {
+            path: 'new',
+            component: CustomerVisitsReportComponent,
+          }
+        ]
       },
-      {
-        path: 'customer-visits-reports/new',
-        component: CustomerVisitsReportComponent,
-      }
     ]
   }
 ];

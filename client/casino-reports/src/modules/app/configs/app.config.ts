@@ -1,11 +1,21 @@
 import { InjectionToken } from '@angular/core';
 
 export interface IAppConfig {
-  apiBaseUrl: string;
+  apiUrl: string;
+  roles: {
+    administrator: string,
+    chiefManager: string,
+    casinoManager: string,
+  };
 }
 
 export const appConfig: IAppConfig = {
-  apiBaseUrl: 'https://localhost:44300/api'
+  apiUrl: 'https://localhost:44300/api',
+  roles: {
+    administrator: 'Administrator',
+    chiefManager: 'ChiefManager',
+    casinoManager: 'CasinoManager',
+  }
 };
 
 export const appConfigToken = new InjectionToken<IAppConfig>(
