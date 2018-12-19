@@ -1,14 +1,19 @@
 ﻿namespace CasinoReports.Web.Api.Controllers
 {
+    using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
 
     using CasinoReports.Core.Models.Entities;
+    using CasinoReports.Core.Services.Abstractions;
     using CasinoReports.Infrastructure.Data.Abstractions.Repositories;
     using CasinoReports.Web.Api.Mapping;
     using CasinoReports.Web.Api.Models.CustomerVisitsImport;
+
     using CsvHelper;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
@@ -17,16 +22,38 @@
     [Authorize(Policy = AuthorizationPolicies.ManageCustomerVisitsData)]
     public class CustomerVisitsImportController : BaseController
     {
-        private readonly ICustomerVisitsCollectionRepository customerVisitsCollectionRepository;
-
         private readonly ICustomerVisitsImportRepository customerVisitsImportRepository;
 
+        private readonly ICustomerVisitsCollectionService customerVisitsCollectionService;
+
+        private readonly ICustomerVisitsImportService customerVisitsImportService;
+
         public CustomerVisitsImportController(
-            ICustomerVisitsCollectionRepository customerVisitsCollectionRepository,
-            ICustomerVisitsImportRepository customerVisitsImportRepository)
+            ICustomerVisitsImportRepository customerVisitsImportRepository,
+            ICustomerVisitsCollectionService customerVisitsCollectionService,
+            ICustomerVisitsImportService customerVisitsImportService)
         {
-            this.customerVisitsCollectionRepository = customerVisitsCollectionRepository;
             this.customerVisitsImportRepository = customerVisitsImportRepository;
+            this.customerVisitsCollectionService = customerVisitsCollectionService;
+            this.customerVisitsImportService = customerVisitsImportService;
+        }
+
+        public async Task<IActionResult> Get()
+        {
+            IReadOnlyList<CustomerVisitsImport> customerVisitsImports =
+                await this.customerVisitsImportService.GetAllWithCollectionAsNoTrackingAsync();
+
+            // todo: probably use Automapper
+            IEnumerable<CustomerVisitsImportViewModel> viewModel =
+                customerVisitsImports.Select(c => new CustomerVisitsImportViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Collection = c.CustomerVisitsCollection.Name,
+                    CreatedOn = c.CreatedOn.ToLocalTime(),
+                });
+
+            return this.Ok(viewModel);
         }
 
         [HttpPost]
@@ -35,7 +62,7 @@
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         public async Task<IActionResult> Post([FromForm] CustomerVisitsImportInputModel customerVisitsImportInputModel)
         {
-            CustomerVisitsCollection customerVisitsCollection = await this.customerVisitsCollectionRepository.GetByIdAsync(
+            CustomerVisitsCollection customerVisitsCollection = await this.customerVisitsCollectionService.GetByIdAsync(
                 customerVisitsImportInputModel.CustomerVisitsCollectionId);
 
             CustomerVisitsImport customerVisitsImport = new CustomerVisitsImport(

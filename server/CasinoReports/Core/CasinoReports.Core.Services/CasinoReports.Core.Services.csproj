@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Data\CasinoReports.Infrastructure.Data.Abstractions\CasinoReports.Infrastructure.Data.Abstractions.csproj" />
     <ProjectReference Include="..\CasinoReports.Core.Models\CasinoReports.Core.Models.csproj" />
     <ProjectReference Include="..\CasinoReports.Core.Services.Abstractions\CasinoReports.Core.Services.Abstractions.csproj" />
     <ProjectReference Include="..\CasinoReports.Core.Specifications\CasinoReports.Core.Specifications.csproj" />

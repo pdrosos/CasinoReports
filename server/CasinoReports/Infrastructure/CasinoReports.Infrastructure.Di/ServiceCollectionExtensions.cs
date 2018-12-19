@@ -1,5 +1,7 @@
 ﻿namespace CasinoReports.Infrastructure.Di
 {
+    using CasinoReports.Core.Services;
+    using CasinoReports.Core.Services.Abstractions;
     using CasinoReports.Infrastructure.Data;
     using CasinoReports.Infrastructure.Data.Abstractions.Repositories;
     using CasinoReports.Infrastructure.Data.Repositories;
@@ -32,8 +34,12 @@
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
+
             services.AddScoped(typeof(ICustomerVisitsCollectionRepository), typeof(CustomerVisitsCollectionRepository));
             services.AddScoped(typeof(ICustomerVisitsImportRepository), typeof(CustomerVisitsImportRepository));
+
+            services.AddScoped(typeof(ICustomerVisitsCollectionService), typeof(CustomerVisitsCollectionService));
+            services.AddScoped(typeof(ICustomerVisitsImportService), typeof(CustomerVisitsImportService));
         }
 
         private static void BindServices(IServiceCollection services)
