@@ -15,7 +15,7 @@
             // used by EF Core
             this.CustomerVisitsCollectionCasinos = new HashSet<CustomerVisitsCollectionCasino>();
             this.CustomerVisitsCollectionUsers = new HashSet<CustomerVisitsCollectionUser>();
-            this.CustomerVisitsImports = new List<CustomerVisitsImport>();
+            this.CustomerVisitsCollectionImports = new HashSet<CustomerVisitsCollectionImport>();
         }
 
         public string Name { get; private set; }
@@ -24,7 +24,7 @@
 
         public ICollection<CustomerVisitsCollectionUser> CustomerVisitsCollectionUsers { get; }
 
-        public ICollection<CustomerVisitsImport> CustomerVisitsImports { get; }
+        public ICollection<CustomerVisitsCollectionImport> CustomerVisitsCollectionImports { get; }
 
         public void AddCustomerVisitsCollectionCasino(CustomerVisitsCollectionCasino customerVisitsCollectionCasino)
         {
@@ -54,6 +54,21 @@
         public bool RemoveCustomerVisitsCollectionUser(CustomerVisitsCollectionUser customerVisitsCollectionUser)
         {
             return this.CustomerVisitsCollectionUsers.Remove(customerVisitsCollectionUser);
+        }
+
+        public void AddCustomerVisitsCollectionImport(CustomerVisitsCollectionImport customerVisitsCollectionImport)
+        {
+            if (this.CustomerVisitsCollectionImports.Contains(customerVisitsCollectionImport))
+            {
+                return;
+            }
+
+            this.CustomerVisitsCollectionImports.Add(customerVisitsCollectionImport);
+        }
+
+        public bool RemoveCustomerVisitsCollectionImport(CustomerVisitsCollectionImport customerVisitsCollectionImport)
+        {
+            return this.CustomerVisitsCollectionImports.Remove(customerVisitsCollectionImport);
         }
     }
 }

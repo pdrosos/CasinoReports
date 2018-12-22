@@ -137,18 +137,43 @@
                 applicationDbContext.SaveChanges();
 
                 // create customer visits collections and add casinos to them
-                var collection2018 = new CustomerVisitsCollection("2018");
-                collection2018.AddCustomerVisitsCollectionCasino(new CustomerVisitsCollectionCasino(collection2018, casino1));
-                collection2018.AddCustomerVisitsCollectionCasino(new CustomerVisitsCollectionCasino(collection2018, casino2));
-                collection2018.AddCustomerVisitsCollectionCasino(new CustomerVisitsCollectionCasino(collection2018, casino3));
+                var collectionCasino12018 = new CustomerVisitsCollection("Casino 1 2018");
+                collectionCasino12018.AddCustomerVisitsCollectionCasino(
+                    new CustomerVisitsCollectionCasino(collectionCasino12018, casino1));
 
-                var collection2019 = new CustomerVisitsCollection("2019");
-                collection2019.AddCustomerVisitsCollectionCasino(new CustomerVisitsCollectionCasino(collection2019, casino1));
-                collection2019.AddCustomerVisitsCollectionCasino(new CustomerVisitsCollectionCasino(collection2019, casino3));
+                var collectionCasino22018 = new CustomerVisitsCollection("Casino 2 2018");
+                collectionCasino22018.AddCustomerVisitsCollectionCasino(
+                    new CustomerVisitsCollectionCasino(collectionCasino22018, casino2));
+
+                var collectionCasino32018 = new CustomerVisitsCollection("Casino 3 2018");
+                collectionCasino32018.AddCustomerVisitsCollectionCasino(
+                    new CustomerVisitsCollectionCasino(collectionCasino32018, casino3));
+
+                var collectionAll2018 = new CustomerVisitsCollection("All 2018");
+
+                var collectionCasino12019 = new CustomerVisitsCollection("Casino 1 2019");
+                collectionCasino12019.AddCustomerVisitsCollectionCasino(
+                    new CustomerVisitsCollectionCasino(collectionCasino12019, casino1));
+
+                var collectionCasino22019 = new CustomerVisitsCollection("Casino 2 2019");
+                collectionCasino22019.AddCustomerVisitsCollectionCasino(
+                    new CustomerVisitsCollectionCasino(collectionCasino22019, casino2));
+
+                var collectionCasino32019 = new CustomerVisitsCollection("Casino 3 2019");
+                collectionCasino32019.AddCustomerVisitsCollectionCasino(
+                    new CustomerVisitsCollectionCasino(collectionCasino32019, casino3));
+
+                var collectionAll2019 = new CustomerVisitsCollection("All 2019");
 
                 var collections = new List<CustomerVisitsCollection>();
-                collections.Add(collection2018);
-                collections.Add(collection2019);
+                collections.Add(collectionCasino12018);
+                collections.Add(collectionCasino22018);
+                collections.Add(collectionCasino32018);
+                collections.Add(collectionAll2018);
+                collections.Add(collectionCasino12019);
+                collections.Add(collectionCasino22019);
+                collections.Add(collectionCasino32019);
+                collections.Add(collectionAll2019);
 
                 applicationDbContext.CustomerVisitsCollections.AddRange(collections);
                 applicationDbContext.SaveChanges();

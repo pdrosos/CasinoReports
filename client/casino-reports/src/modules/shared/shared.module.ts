@@ -6,6 +6,8 @@ import { MaterialModule } from '@shared/material.module';
 
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 
+import { FlexmonsterPivotModule } from 'ng-flexmonster';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -16,6 +18,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
     ReactiveFormsModule,
     MaterialModule,
     MaterialFileInputModule,
+    FlexmonsterPivotModule,
   ],
   declarations: [],
 })

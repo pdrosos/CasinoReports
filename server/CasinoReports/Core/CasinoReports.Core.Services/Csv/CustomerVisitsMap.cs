@@ -1,4 +1,4 @@
-﻿namespace CasinoReports.Web.Api.Mapping
+﻿namespace CasinoReports.Core.Services.Csv
 {
     using CasinoReports.Core.Models.Entities;
     using CsvHelper.Configuration;

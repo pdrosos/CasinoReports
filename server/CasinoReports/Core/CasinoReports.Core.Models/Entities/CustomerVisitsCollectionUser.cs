@@ -45,8 +45,8 @@
                 return false;
             }
 
-            return this.ApplicationUserId.Equals(other.ApplicationUserId) &&
-                   this.CustomerVisitsCollectionId.Equals(other.CustomerVisitsCollectionId);
+            return this.CustomerVisitsCollectionId.Equals(other.CustomerVisitsCollectionId) &&
+                   this.ApplicationUserId.Equals(other.ApplicationUserId);
         }
 
         public override int GetHashCode()
@@ -54,6 +54,7 @@
             unchecked
             {
                 int hashCode = 17;
+
                 hashCode = (hashCode * 23) +
                            (!ReferenceEquals(null, this.CustomerVisitsCollectionId) ?
                                this.CustomerVisitsCollectionId.GetHashCode() : 0);

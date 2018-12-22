@@ -7,8 +7,6 @@
 
     public interface ICustomerVisitsCollectionService
     {
-        Task<CustomerVisitsCollection> GetByIdAsync(int id);
-
         Task<IReadOnlyList<CustomerVisitsCollection>> GetAllAsNoTrackingAsync();
     }
 }

@@ -11,8 +11,8 @@
   </ng-container>
 
   <ng-container matColumnDef="collection">
-    <th mat-header-cell *matHeaderCellDef> Collection </th>
-    <td mat-cell *matCellDef="let row"> {{ row.collection }} </td>
+    <th mat-header-cell *matHeaderCellDef> Collections </th>
+    <td mat-cell *matCellDef="let row"> {{ row.getCollectionsNames() }} </td>
   </ng-container>
 
   <ng-container matColumnDef="createdOn">

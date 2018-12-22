@@ -29,13 +29,13 @@ export class CustomerVisitsImportFormComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      customerVisitsCollectionId: [
+      'customerVisitsCollectionIds': [
         '',
         [Validators.required],
       ],
       name: [
         '',
-        [Validators.required, Validators.minLength(3)],
+        [Validators.required, Validators.maxLength(100)],
       ],
       customerVisits: [
         '',
@@ -54,10 +54,14 @@ export class CustomerVisitsImportFormComponent implements OnInit {
   private getFormData(): FormData {
     const formData = new FormData();
 
-    const fileInput: FileInput = this.form.get('customerVisits').value;
+    const customerVisitsCollectionIds: string[] = this.form.get('customerVisitsCollectionIds').value;
+    customerVisitsCollectionIds.forEach((id) => {
+      formData.append('customerVisitsCollectionIds[]', id);
+    });
 
-    formData.append('customerVisitsCollectionId', this.form.get('customerVisitsCollectionId').value);
     formData.append('name', this.form.get('name').value);
+
+    const fileInput: FileInput = this.form.get('customerVisits').value;
     formData.append('customerVisits', fileInput.files[0]);
 
     return formData;

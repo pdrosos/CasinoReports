@@ -95,7 +95,7 @@
             {
                 var defaultAuthorizationPolicyBuilder = new AuthorizationPolicyBuilder(
                     JwtBearerDefaults.AuthenticationScheme);
-                defaultAuthorizationPolicyBuilder = defaultAuthorizationPolicyBuilder.RequireAuthenticatedUser();
+                defaultAuthorizationPolicyBuilder.RequireAuthenticatedUser();
 
                 options.DefaultPolicy = defaultAuthorizationPolicyBuilder.Build();
 

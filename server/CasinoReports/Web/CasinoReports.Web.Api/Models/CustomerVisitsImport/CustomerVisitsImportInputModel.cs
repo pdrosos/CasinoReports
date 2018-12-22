@@ -13,10 +13,9 @@
     public class CustomerVisitsImportInputModel : IValidatableObject
     {
         [Required]
-        public int CustomerVisitsCollectionId { get; set; }
+        public IEnumerable<int> CustomerVisitsCollectionIds { get; set; }
 
         [Required]
-        [MinLength(3)]
         [MaxLength(100)]
         public string Name { get; set; }
 
@@ -42,11 +41,14 @@
                 yield return ValidationResult.Success;
             }
 
-            var item = repository.GetByIdAsync(this.CustomerVisitsCollectionId).GetAwaiter().GetResult();
-            if (item == null)
+            foreach (var customerVisitsCollectionId in this.CustomerVisitsCollectionIds)
             {
-                yield return new ValidationResult(
-                    $"Customer visits collection with ID {this.CustomerVisitsCollectionId} does not exist");
+                var item = repository.GetByIdAsync(customerVisitsCollectionId).GetAwaiter().GetResult();
+                if (item == null)
+                {
+                    yield return new ValidationResult(
+                        $"Customer visits collection with ID {customerVisitsCollectionId} does not exist");
+                }
             }
 
             yield return ValidationResult.Success;

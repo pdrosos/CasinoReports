@@ -1,5 +1,6 @@
 ﻿namespace CasinoReports.Web.Api.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -8,8 +9,8 @@
 
     using CasinoReports.Core.Models.Entities;
     using CasinoReports.Core.Services.Abstractions;
-    using CasinoReports.Infrastructure.Data.Abstractions.Repositories;
-    using CasinoReports.Web.Api.Mapping;
+    using CasinoReports.Core.Services.Csv;
+    using CasinoReports.Web.Api.Models.CustomerVisitsCollection;
     using CasinoReports.Web.Api.Models.CustomerVisitsImport;
 
     using CsvHelper;
@@ -22,26 +23,21 @@
     [Authorize(Policy = AuthorizationPolicies.ManageCustomerVisitsData)]
     public class CustomerVisitsImportController : BaseController
     {
-        private readonly ICustomerVisitsImportRepository customerVisitsImportRepository;
-
-        private readonly ICustomerVisitsCollectionService customerVisitsCollectionService;
-
         private readonly ICustomerVisitsImportService customerVisitsImportService;
 
         public CustomerVisitsImportController(
-            ICustomerVisitsImportRepository customerVisitsImportRepository,
-            ICustomerVisitsCollectionService customerVisitsCollectionService,
             ICustomerVisitsImportService customerVisitsImportService)
         {
-            this.customerVisitsImportRepository = customerVisitsImportRepository;
-            this.customerVisitsCollectionService = customerVisitsCollectionService;
             this.customerVisitsImportService = customerVisitsImportService;
         }
 
+        [HttpGet]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(IEnumerable<CustomerVisitsImportViewModel>), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
         {
             IReadOnlyList<CustomerVisitsImport> customerVisitsImports =
-                await this.customerVisitsImportService.GetAllWithCollectionAsNoTrackingAsync();
+                await this.customerVisitsImportService.GetAllWithCollectionsAsNoTrackingAsync();
 
             // todo: probably use Automapper
             IEnumerable<CustomerVisitsImportViewModel> viewModel =
@@ -49,8 +45,12 @@
                 {
                     Id = c.Id,
                     Name = c.Name,
-                    CollectionId = c.CustomerVisitsCollection.Id,
-                    Collection = c.CustomerVisitsCollection.Name,
+                    Collections = c.CustomerVisitsCollectionImports.Select(ci => new CustomerVisitsCollectionViewModel
+                    {
+                        Id = ci.CustomerVisitsCollection.Id,
+                        Name = ci.CustomerVisitsCollection.Name,
+                        CreatedOn = ci.CustomerVisitsCollection.CreatedOn,
+                    }),
                     CreatedOn = c.CreatedOn.ToLocalTime(),
                 });
 
@@ -60,49 +60,32 @@
         [HttpPost]
         [Consumes("multipart/form-data")]
         [Produces("application/json", "application/problem+json")]
-        [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         public async Task<IActionResult> Post([FromForm] CustomerVisitsImportInputModel customerVisitsImportInputModel)
         {
-            CustomerVisitsCollection customerVisitsCollection = await this.customerVisitsCollectionService.GetByIdAsync(
-                customerVisitsImportInputModel.CustomerVisitsCollectionId);
-
-            CustomerVisitsImport customerVisitsImport = new CustomerVisitsImport(
-                customerVisitsImportInputModel.Name,
-                customerVisitsCollection);
-
-            IFormFile file = customerVisitsImportInputModel.CustomerVisits;
-            using (var streamReader = new StreamReader(file.OpenReadStream(), Encoding.GetEncoding("windows-1251")))
+            try
             {
-                using (CsvReader csvReader = this.CreateCsvReader(streamReader))
+                IFormFile file = customerVisitsImportInputModel.CustomerVisits;
+                using (var streamReader = new StreamReader(file.OpenReadStream(), Encoding.GetEncoding("windows-1251")))
                 {
-                    var records = csvReader.GetRecords<CustomerVisits>();
-                    foreach (var customerVisits in records)
+                    using (CsvReader csvReader = CustomerVisitsCsvFactory.CreateReader(streamReader))
                     {
-                        customerVisitsImport.AddCustomerVisits(customerVisits);
-                    }
+                        IEnumerable<CustomerVisits> customerVisits = csvReader.GetRecords<CustomerVisits>();
 
-                    this.customerVisitsImportRepository.Add(customerVisitsImport);
-                    await this.customerVisitsImportRepository.SaveChangesAsync();
+                        await this.customerVisitsImportService.CreateAsync(
+                            customerVisitsImportInputModel.Name,
+                            customerVisitsImportInputModel.CustomerVisitsCollectionIds,
+                            customerVisits);
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                return this.UnprocessableEntity(e);
             }
 
             return this.Ok();
-        }
-
-        private CsvReader CreateCsvReader(StreamReader streamReader)
-        {
-            var csvReader = new CsvReader(streamReader);
-
-            csvReader.Configuration.RegisterClassMap<CustomerVisitsMap>();
-            csvReader.Configuration.ShouldUseConstructorParameters = type => false;
-            csvReader.Configuration.MissingFieldFound = null;
-
-            csvReader.Configuration.HasHeaderRecord = true;
-            csvReader.Configuration.HeaderValidated = null;
-            csvReader.Configuration.PrepareHeaderForMatch = (header, index) =>
-                header.Replace("_", string.Empty).ToLower();
-
-            return csvReader;
         }
     }
 }

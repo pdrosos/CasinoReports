@@ -3,7 +3,7 @@
     <br><br>
 
     <mat-form-field class="full-width">
-      <mat-select placeholder="Collection *" formControlName="customerVisitsCollectionId">
+      <mat-select placeholder="Collections *" formControlName="customerVisitsCollectionIds" multiple>
         <mat-option *ngFor="let collection of customerVisitsCollections$ | async" [value]="collection.id">
           {{ collection.name }}
         </mat-option>

@@ -43,7 +43,7 @@
                 return false;
             }
 
-            return this.ApplicationUserId.Equals(other.ApplicationUserId) && this.CasinoId.Equals(other.CasinoId);
+            return this.CasinoId.Equals(other.CasinoId) && this.ApplicationUserId.Equals(other.ApplicationUserId);
         }
 
         public override int GetHashCode()
@@ -51,10 +51,11 @@
             unchecked
             {
                 int hashCode = 17;
-                hashCode = (hashCode * 23) +
-                           (!ReferenceEquals(null, this.ApplicationUserId) ? this.ApplicationUserId.GetHashCode() : 0);
+
                 hashCode = (hashCode * 23) +
                            (!ReferenceEquals(null, this.CasinoId) ? this.CasinoId.GetHashCode() : 0);
+                hashCode = (hashCode * 23) +
+                           (!ReferenceEquals(null, this.ApplicationUserId) ? this.ApplicationUserId.GetHashCode() : 0);
 
                 return hashCode;
             }

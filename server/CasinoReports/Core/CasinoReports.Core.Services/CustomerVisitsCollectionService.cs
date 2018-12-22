@@ -10,16 +10,11 @@
 
     public class CustomerVisitsCollectionService : ICustomerVisitsCollectionService
     {
-        private ICustomerVisitsCollectionRepository customerVisitsCollectionRepository;
+        private readonly ICustomerVisitsCollectionRepository customerVisitsCollectionRepository;
 
         public CustomerVisitsCollectionService(ICustomerVisitsCollectionRepository customerVisitsCollectionRepository)
         {
             this.customerVisitsCollectionRepository = customerVisitsCollectionRepository;
-        }
-
-        public Task<CustomerVisitsCollection> GetByIdAsync(int id)
-        {
-            return this.customerVisitsCollectionRepository.GetByIdAsync(id);
         }
 
         public Task<IReadOnlyList<CustomerVisitsCollection>> GetAllAsNoTrackingAsync()

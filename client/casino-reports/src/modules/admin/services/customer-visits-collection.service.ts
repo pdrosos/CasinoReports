@@ -7,7 +7,7 @@ import { CustomerVisitsCollection } from '@admin/models/customer-visits-collecti
 
 @Injectable()
 export class CustomerVisitsCollectionService {
-  private baseResourceUrl: string;
+  private readonly baseResourceUrl: string;
 
   public constructor(@Inject(appConfigToken) private config: IAppConfig, private httpClient: HttpClient) {
     this.baseResourceUrl = config.apiUrl + '/CustomerVisitsCollection';

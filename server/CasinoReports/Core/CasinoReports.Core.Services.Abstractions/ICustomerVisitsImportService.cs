@@ -7,6 +7,11 @@
 
     public interface ICustomerVisitsImportService
     {
-        Task<IReadOnlyList<CustomerVisitsImport>> GetAllWithCollectionAsNoTrackingAsync();
+        Task<IReadOnlyList<CustomerVisitsImport>> GetAllWithCollectionsAsNoTrackingAsync();
+
+        Task<int> CreateAsync(
+            string name,
+            IEnumerable<int> customerVisitsCollectionIds,
+            IEnumerable<CustomerVisits> customerVisits);
     }
 }

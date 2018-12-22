@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { CustomerVisitsImport } from '@admin/models/customer-visits-import';
 import { CustomerVisitsImportService } from '@admin/services/customer-visits-import.service';
