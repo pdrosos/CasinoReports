@@ -59,14 +59,18 @@
             // Needed for Identity models configuration
             base.OnModelCreating(modelBuilder);
 
-            ConfigureApplicationUserIdentityRelations(modelBuilder);
+            // Configure ApplicationUser identity relations
+            ApplicationUserIdentityRelationsConfiguration.Configure(modelBuilder);
 
-            // Configure indexes
+            // Configure entity properties
+            EntityPropertiesConfiguration.Configure(modelBuilder);
+
+            // Configure entity indexes
             EntityIndexesConfiguration.Configure(modelBuilder);
 
+            // Set global query filter for not deleted entities only
             List<IMutableEntityType> entityTypes = modelBuilder.Model.GetEntityTypes().ToList();
 
-            // Set global query filter for not deleted entities only
             IEnumerable<IMutableEntityType> deletableEntityTypes = entityTypes
                 .Where(et => et.ClrType != null && typeof(IDeletableEntity).IsAssignableFrom(et.ClrType));
             foreach (var deletableEntityType in deletableEntityTypes)
@@ -76,34 +80,10 @@
             }
         }
 
-        private static void ConfigureApplicationUserIdentityRelations(ModelBuilder builder)
-        {
-            builder.Entity<ApplicationUser>()
-                .HasMany(e => e.IdentityUserRoles)
-                .WithOne()
-                .HasForeignKey(e => e.UserId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<ApplicationUser>()
-                .HasMany(e => e.IdentityUserClaims)
-                .WithOne()
-                .HasForeignKey(e => e.UserId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<ApplicationUser>()
-                .HasMany(e => e.IdentityUserLogins)
-                .WithOne()
-                .HasForeignKey(e => e.UserId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
-        }
-
-        private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)
+        private static void SetIsDeletedQueryFilter<T>(ModelBuilder modelBuilder)
             where T : class, IDeletableEntity
         {
-            builder.Entity<T>().HasQueryFilter(e => !e.IsDeleted);
+            modelBuilder.Entity<T>().HasQueryFilter(e => !e.IsDeleted);
         }
 
         private void ApplyAuditInfoRules()
