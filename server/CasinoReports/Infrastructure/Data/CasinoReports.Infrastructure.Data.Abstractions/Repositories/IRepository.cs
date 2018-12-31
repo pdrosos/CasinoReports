@@ -1,7 +1,7 @@
 ﻿namespace CasinoReports.Infrastructure.Data.Abstractions.Repositories
 {
-    using System;
     using System.Collections.Generic;
+    using System.Collections.Immutable;
 
     using CasinoReports.Core.Specifications.Query;
 
@@ -15,6 +15,14 @@
         IReadOnlyList<TEntity> All();
 
         IReadOnlyList<TEntity> AllAsNoTracking();
+
+        ISet<TEntity> AllAsSet();
+
+        ISet<TEntity> AllAsSetAsNoTracking();
+
+        IImmutableSet<TEntity> AllAsImmutableSet();
+
+        IImmutableSet<TEntity> AllAsImmutableSetAsNoTracking();
 
         IReadOnlyList<TEntity> List(IQuerySpecification<TEntity> spec);
 

@@ -44,7 +44,7 @@
                 });
 
             migrationBuilder.CreateTable(
-                name: "CasinoManager",
+                name: "CasinoManagers",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -58,15 +58,15 @@
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CasinoManager", x => x.Id);
+                    table.PrimaryKey("PK_CasinoManagers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CasinoManager_AspNetUsers_ApplicationUserId",
+                        name: "FK_CasinoManagers_AspNetUsers_ApplicationUserId",
                         column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CasinoManager_Casinos_CasinoId",
+                        name: "FK_CasinoManagers_Casinos_CasinoId",
                         column: x => x.CasinoId,
                         principalTable: "Casinos",
                         principalColumn: "Id",
@@ -74,7 +74,7 @@
                 });
 
             migrationBuilder.CreateTable(
-                name: "CustomerVisitsCollectionCasino",
+                name: "CustomerVisitsCollectionCasinos",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -88,15 +88,15 @@
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CustomerVisitsCollectionCasino", x => x.Id);
+                    table.PrimaryKey("PK_CustomerVisitsCollectionCasinos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CustomerVisitsCollectionCasino_Casinos_CasinoId",
+                        name: "FK_CustomerVisitsCollectionCasinos_Casinos_CasinoId",
                         column: x => x.CasinoId,
                         principalTable: "Casinos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CustomerVisitsCollectionCasino_CustomerVisitsCollections_CustomerVisitsCollectionId",
+                        name: "FK_CustomerVisitsCollectionCasinos_CustomerVisitsCollections_CustomerVisitsCollectionId",
                         column: x => x.CustomerVisitsCollectionId,
                         principalTable: "CustomerVisitsCollections",
                         principalColumn: "Id",
@@ -104,7 +104,7 @@
                 });
 
             migrationBuilder.CreateTable(
-                name: "CustomerVisitsCollectionUser",
+                name: "CustomerVisitsCollectionUsers",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -118,15 +118,15 @@
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CustomerVisitsCollectionUser", x => x.Id);
+                    table.PrimaryKey("PK_CustomerVisitsCollectionUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CustomerVisitsCollectionUser_AspNetUsers_ApplicationUserId",
+                        name: "FK_CustomerVisitsCollectionUsers_AspNetUsers_ApplicationUserId",
                         column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CustomerVisitsCollectionUser_CustomerVisitsCollections_CustomerVisitsCollectionId",
+                        name: "FK_CustomerVisitsCollectionUsers_CustomerVisitsCollections_CustomerVisitsCollectionId",
                         column: x => x.CustomerVisitsCollectionId,
                         principalTable: "CustomerVisitsCollections",
                         principalColumn: "Id",
@@ -134,7 +134,7 @@
                 });
 
             migrationBuilder.CreateTable(
-                name: "CustomerVisitsImport",
+                name: "CustomerVisitsImports",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -148,9 +148,9 @@
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CustomerVisitsImport", x => x.Id);
+                    table.PrimaryKey("PK_CustomerVisitsImports", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CustomerVisitsImport_CustomerVisitsCollections_CustomerVisitsCollectionId",
+                        name: "FK_CustomerVisitsImports_CustomerVisitsCollections_CustomerVisitsCollectionId",
                         column: x => x.CustomerVisitsCollectionId,
                         principalTable: "CustomerVisitsCollections",
                         principalColumn: "Id",
@@ -196,26 +196,26 @@
                 {
                     table.PrimaryKey("PK_CustomerVisits", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CustomerVisits_CustomerVisitsImport_CustomerVisitsImportId",
+                        name: "FK_CustomerVisits_CustomerVisitsImports_CustomerVisitsImportId",
                         column: x => x.CustomerVisitsImportId,
-                        principalTable: "CustomerVisitsImport",
+                        principalTable: "CustomerVisitsImports",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CasinoManager_ApplicationUserId",
-                table: "CasinoManager",
+                name: "IX_CasinoManagers_ApplicationUserId",
+                table: "CasinoManagers",
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CasinoManager_CasinoId",
-                table: "CasinoManager",
+                name: "IX_CasinoManagers_CasinoId",
+                table: "CasinoManagers",
                 column: "CasinoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CasinoManager_IsDeleted",
-                table: "CasinoManager",
+                name: "IX_CasinoManagers_IsDeleted",
+                table: "CasinoManagers",
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
@@ -234,18 +234,18 @@
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerVisitsCollectionCasino_CasinoId",
-                table: "CustomerVisitsCollectionCasino",
+                name: "IX_CustomerVisitsCollectionCasinos_CasinoId",
+                table: "CustomerVisitsCollectionCasinos",
                 column: "CasinoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerVisitsCollectionCasino_CustomerVisitsCollectionId",
-                table: "CustomerVisitsCollectionCasino",
+                name: "IX_CustomerVisitsCollectionCasinos_CustomerVisitsCollectionId",
+                table: "CustomerVisitsCollectionCasinos",
                 column: "CustomerVisitsCollectionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerVisitsCollectionCasino_IsDeleted",
-                table: "CustomerVisitsCollectionCasino",
+                name: "IX_CustomerVisitsCollectionCasinos_IsDeleted",
+                table: "CustomerVisitsCollectionCasinos",
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
@@ -254,47 +254,47 @@
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerVisitsCollectionUser_ApplicationUserId",
-                table: "CustomerVisitsCollectionUser",
+                name: "IX_CustomerVisitsCollectionUsers_ApplicationUserId",
+                table: "CustomerVisitsCollectionUsers",
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerVisitsCollectionUser_CustomerVisitsCollectionId",
-                table: "CustomerVisitsCollectionUser",
+                name: "IX_CustomerVisitsCollectionUsers_CustomerVisitsCollectionId",
+                table: "CustomerVisitsCollectionUsers",
                 column: "CustomerVisitsCollectionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerVisitsCollectionUser_IsDeleted",
-                table: "CustomerVisitsCollectionUser",
+                name: "IX_CustomerVisitsCollectionUsers_IsDeleted",
+                table: "CustomerVisitsCollectionUsers",
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerVisitsImport_CustomerVisitsCollectionId",
-                table: "CustomerVisitsImport",
+                name: "IX_CustomerVisitsImports_CustomerVisitsCollectionId",
+                table: "CustomerVisitsImports",
                 column: "CustomerVisitsCollectionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerVisitsImport_IsDeleted",
-                table: "CustomerVisitsImport",
+                name: "IX_CustomerVisitsImports_IsDeleted",
+                table: "CustomerVisitsImports",
                 column: "IsDeleted");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CasinoManager");
+                name: "CasinoManagers");
 
             migrationBuilder.DropTable(
                 name: "CustomerVisits");
 
             migrationBuilder.DropTable(
-                name: "CustomerVisitsCollectionCasino");
+                name: "CustomerVisitsCollectionCasinos");
 
             migrationBuilder.DropTable(
-                name: "CustomerVisitsCollectionUser");
+                name: "CustomerVisitsCollectionUsers");
 
             migrationBuilder.DropTable(
-                name: "CustomerVisitsImport");
+                name: "CustomerVisitsImports");
 
             migrationBuilder.DropTable(
                 name: "Casinos");

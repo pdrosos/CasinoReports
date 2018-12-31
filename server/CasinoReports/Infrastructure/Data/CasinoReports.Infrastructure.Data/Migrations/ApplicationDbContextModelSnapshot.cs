@@ -137,6 +137,31 @@ namespace CasinoReports.Infrastructure.Data.Migrations
                     b.ToTable("Casinos");
                 });
 
+            modelBuilder.Entity("CasinoReports.Core.Models.Entities.CasinoGame", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<int>("DisplayOrder");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("ModifiedOn");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("CasinoGames");
+                });
+
             modelBuilder.Entity("CasinoReports.Core.Models.Entities.CasinoManager", b =>
                 {
                     b.Property<int>("Id")
@@ -163,7 +188,57 @@ namespace CasinoReports.Infrastructure.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("CasinoManager");
+                    b.ToTable("CasinoManagers");
+                });
+
+            modelBuilder.Entity("CasinoReports.Core.Models.Entities.CasinoPlayerType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<int>("DisplayOrder");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("ModifiedOn");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("CasinoPlayerTypes");
+                });
+
+            modelBuilder.Entity("CasinoReports.Core.Models.Entities.CustomerTotalBetRange", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<int>("DisplayOrder");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("ModifiedOn");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("CustomerTotalBetRanges");
                 });
 
             modelBuilder.Entity("CasinoReports.Core.Models.Entities.CustomerVisits", b =>
@@ -219,16 +294,16 @@ namespace CasinoReports.Infrastructure.Data.Migrations
 
                     b.Property<bool?>("PlayPercent");
 
-                    b.Property<string>("PlayerType");
+                    b.Property<int?>("PlayerTypeId");
 
-                    b.Property<string>("PreferGame");
+                    b.Property<int?>("PreferGameId");
 
                     b.Property<int>("TombolaGame");
 
                     b.Property<decimal>("TotalBet")
                         .HasColumnType("decimal(22, 10)");
 
-                    b.Property<string>("TotalBetRange");
+                    b.Property<int?>("TotalBetRangeId");
 
                     b.Property<decimal>("TotalBonuses")
                         .HasColumnType("decimal(22, 10)");
@@ -239,7 +314,15 @@ namespace CasinoReports.Infrastructure.Data.Migrations
 
                     b.HasIndex("CustomerVisitsImportId");
 
+                    b.HasIndex("Date");
+
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("PlayerTypeId");
+
+                    b.HasIndex("PreferGameId");
+
+                    b.HasIndex("TotalBetRangeId");
 
                     b.ToTable("CustomerVisits");
                 });
@@ -293,7 +376,7 @@ namespace CasinoReports.Infrastructure.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("CustomerVisitsCollectionCasino");
+                    b.ToTable("CustomerVisitsCollectionCasinos");
                 });
 
             modelBuilder.Entity("CasinoReports.Core.Models.Entities.CustomerVisitsCollectionImport", b =>
@@ -322,7 +405,7 @@ namespace CasinoReports.Infrastructure.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("CustomerVisitsCollectionImport");
+                    b.ToTable("CustomerVisitsCollectionImports");
                 });
 
             modelBuilder.Entity("CasinoReports.Core.Models.Entities.CustomerVisitsCollectionUser", b =>
@@ -351,7 +434,7 @@ namespace CasinoReports.Infrastructure.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("CustomerVisitsCollectionUser");
+                    b.ToTable("CustomerVisitsCollectionUsers");
                 });
 
             modelBuilder.Entity("CasinoReports.Core.Models.Entities.CustomerVisitsImport", b =>
@@ -374,7 +457,7 @@ namespace CasinoReports.Infrastructure.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("CustomerVisitsImport");
+                    b.ToTable("CustomerVisitsImports");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -478,6 +561,18 @@ namespace CasinoReports.Infrastructure.Data.Migrations
                     b.HasOne("CasinoReports.Core.Models.Entities.CustomerVisitsImport", "CustomerVisitsImport")
                         .WithMany("CustomerVisits")
                         .HasForeignKey("CustomerVisitsImportId");
+
+                    b.HasOne("CasinoReports.Core.Models.Entities.CasinoPlayerType", "PlayerType")
+                        .WithMany()
+                        .HasForeignKey("PlayerTypeId");
+
+                    b.HasOne("CasinoReports.Core.Models.Entities.CasinoGame", "PreferGame")
+                        .WithMany()
+                        .HasForeignKey("PreferGameId");
+
+                    b.HasOne("CasinoReports.Core.Models.Entities.CustomerTotalBetRange", "TotalBetRange")
+                        .WithMany()
+                        .HasForeignKey("TotalBetRangeId");
                 });
 
             modelBuilder.Entity("CasinoReports.Core.Models.Entities.CustomerVisitsCollectionCasino", b =>

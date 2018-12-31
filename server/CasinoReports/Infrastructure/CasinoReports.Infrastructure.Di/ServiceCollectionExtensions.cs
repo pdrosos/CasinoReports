@@ -35,6 +35,9 @@
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
 
+            services.AddScoped(typeof(ICasinoGameRepository), typeof(CasinoGameRepository));
+            services.AddScoped(typeof(ICasinoPlayerTypeRepository), typeof(CasinoPlayerTypeRepository));
+            services.AddScoped(typeof(ICustomerTotalBetRangeRepository), typeof(CustomerTotalBetRangeRepository));
             services.AddScoped(typeof(ICustomerVisitsCollectionRepository), typeof(CustomerVisitsCollectionRepository));
             services.AddScoped(typeof(ICustomerVisitsImportRepository), typeof(CustomerVisitsImportRepository));
 

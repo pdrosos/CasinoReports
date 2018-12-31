@@ -2,6 +2,8 @@
 {
     using System;
 
+    using CasinoReports.Core.Models.Dtos;
+
     public class CustomerVisits : BaseEquatableDeletableEntity<long, CustomerVisits>
     {
         public CustomerVisits(CustomerVisitsImport customerVisitsImport)
@@ -9,9 +11,9 @@
             this.CustomerVisitsImport = customerVisitsImport;
         }
 
-        public CustomerVisits()
+        private CustomerVisits()
         {
-            // used by CsvHelper and by EF Core
+            // used by EF Core
         }
 
         public CustomerVisitsImport CustomerVisitsImport { get; set; }
@@ -22,13 +24,13 @@
 
         public DateTime Date { get; set; }
 
-        public string PreferGame { get; set; }
+        public CasinoGame PreferGame { get; set; }
 
         public int Visits { get; set; }
 
         public decimal? AvgBet { get; set; }
 
-        public string PlayerType { get; set; }
+        public CasinoPlayerType PlayerType { get; set; }
 
         public decimal TotalBet { get; set; }
 
@@ -60,6 +62,43 @@
 
         public bool Holded { get; set; }
 
-        public string TotalBetRange { get; set; }
+        public CustomerTotalBetRange TotalBetRange { get; set; }
+
+        public static CustomerVisits FromDto(
+            CustomerVisitsDto customerVisitsDto,
+            CustomerVisitsImport customerVisitsImport,
+            CasinoGame casinoGame,
+            CasinoPlayerType casinoPlayerType,
+            CustomerTotalBetRange customerTotalBetRange)
+        {
+            var customerVisits = new CustomerVisits(customerVisitsImport)
+            {
+                NameFirstLast = customerVisitsDto.NameFirstLast,
+                BirthDate = customerVisitsDto.BirthDate,
+                Date = customerVisitsDto.Date,
+                PreferGame = casinoGame,
+                Visits = customerVisitsDto.Visits,
+                AvgBet = customerVisitsDto.AvgBet,
+                PlayerType = casinoPlayerType,
+                TotalBet = customerVisitsDto.TotalBet,
+                Balance = customerVisitsDto.Balance,
+                Bonus = customerVisitsDto.Bonus,
+                BonusFromPoints = customerVisitsDto.BonusFromPoints,
+                MatchPay = customerVisitsDto.MatchPay,
+                TombolaGame = customerVisitsDto.TombolaGame,
+                TotalBonuses = customerVisitsDto.TotalBonuses,
+                CleanBalance = customerVisitsDto.CleanBalance,
+                BonusPercentOfBet = customerVisitsDto.BonusPercentOfBet,
+                BonusPercentOfLose = customerVisitsDto.BonusPercentOfLose,
+                PlayPercent = customerVisitsDto.PlayPercent,
+                NewCustomers = customerVisitsDto.NewCustomers,
+                HoldOnSept = customerVisitsDto.HoldOnSept,
+                HoldOnOkt = customerVisitsDto.HoldOnOkt,
+                Holded = customerVisitsDto.Holded,
+                TotalBetRange = customerTotalBetRange,
+            };
+
+            return customerVisits;
+        }
     }
 }

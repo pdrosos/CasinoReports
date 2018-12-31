@@ -10,6 +10,9 @@
     {
         public static void Configure(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CustomerVisits>()
+                .HasIndex(nameof(CustomerVisits.Date));
+
             // IDeletableEntity.IsDeleted index
             var deletableEntityTypes = modelBuilder.Model
                 .GetEntityTypes()

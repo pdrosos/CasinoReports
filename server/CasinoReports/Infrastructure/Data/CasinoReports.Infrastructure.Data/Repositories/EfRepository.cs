@@ -1,7 +1,7 @@
 ﻿namespace CasinoReports.Infrastructure.Data.Repositories
 {
-    using System;
     using System.Collections.Generic;
+    using System.Collections.Immutable;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -62,6 +62,26 @@
         public virtual async Task<IReadOnlyList<TEntity>> AllAsNoTrackingAsync()
         {
             return await this.DbSet.AsNoTracking().ToListAsync();
+        }
+
+        public virtual ISet<TEntity> AllAsSet()
+        {
+            return this.DbSet.ToHashSet();
+        }
+
+        public virtual ISet<TEntity> AllAsSetAsNoTracking()
+        {
+            return this.DbSet.AsNoTracking().ToHashSet();
+        }
+
+        public virtual IImmutableSet<TEntity> AllAsImmutableSet()
+        {
+            return this.DbSet.ToImmutableHashSet();
+        }
+
+        public virtual IImmutableSet<TEntity> AllAsImmutableSetAsNoTracking()
+        {
+            return this.DbSet.AsNoTracking().ToImmutableHashSet();
         }
 
         public virtual IReadOnlyList<TEntity> List(IQuerySpecification<TEntity> spec)

@@ -10,19 +10,19 @@
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_CustomerVisitsImport_CustomerVisitsCollections_CustomerVisitsCollectionId",
-                table: "CustomerVisitsImport");
+                name: "FK_CustomerVisitsImports_CustomerVisitsCollections_CustomerVisitsCollectionId",
+                table: "CustomerVisitsImports");
 
             migrationBuilder.DropIndex(
-                name: "IX_CustomerVisitsImport_CustomerVisitsCollectionId",
-                table: "CustomerVisitsImport");
+                name: "IX_CustomerVisitsImports_CustomerVisitsCollectionId",
+                table: "CustomerVisitsImports");
 
             migrationBuilder.DropColumn(
                 name: "CustomerVisitsCollectionId",
-                table: "CustomerVisitsImport");
+                table: "CustomerVisitsImports");
 
             migrationBuilder.CreateTable(
-                name: "CustomerVisitsCollectionImport",
+                name: "CustomerVisitsCollectionImports",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -36,55 +36,55 @@
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CustomerVisitsCollectionImport", x => x.Id);
+                    table.PrimaryKey("PK_CustomerVisitsCollectionImports", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CustomerVisitsCollectionImport_CustomerVisitsCollections_CustomerVisitsCollectionId",
+                        name: "FK_CustomerVisitsCollectionImports_CustomerVisitsCollections_CustomerVisitsCollectionId",
                         column: x => x.CustomerVisitsCollectionId,
                         principalTable: "CustomerVisitsCollections",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CustomerVisitsCollectionImport_CustomerVisitsImport_CustomerVisitsImportId",
+                        name: "FK_CustomerVisitsCollectionImports_CustomerVisitsImports_CustomerVisitsImportId",
                         column: x => x.CustomerVisitsImportId,
-                        principalTable: "CustomerVisitsImport",
+                        principalTable: "CustomerVisitsImports",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerVisitsCollectionImport_CustomerVisitsCollectionId",
-                table: "CustomerVisitsCollectionImport",
+                name: "IX_CustomerVisitsCollectionImports_CustomerVisitsCollectionId",
+                table: "CustomerVisitsCollectionImports",
                 column: "CustomerVisitsCollectionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerVisitsCollectionImport_CustomerVisitsImportId",
-                table: "CustomerVisitsCollectionImport",
+                name: "IX_CustomerVisitsCollectionImports_CustomerVisitsImportId",
+                table: "CustomerVisitsCollectionImports",
                 column: "CustomerVisitsImportId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerVisitsCollectionImport_IsDeleted",
-                table: "CustomerVisitsCollectionImport",
+                name: "IX_CustomerVisitsCollectionImports_IsDeleted",
+                table: "CustomerVisitsCollectionImports",
                 column: "IsDeleted");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CustomerVisitsCollectionImport");
+                name: "CustomerVisitsCollectionImports");
 
             migrationBuilder.AddColumn<int>(
                 name: "CustomerVisitsCollectionId",
-                table: "CustomerVisitsImport",
+                table: "CustomerVisitsImports",
                 nullable: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerVisitsImport_CustomerVisitsCollectionId",
-                table: "CustomerVisitsImport",
+                name: "IX_CustomerVisitsImports_CustomerVisitsCollectionId",
+                table: "CustomerVisitsImports",
                 column: "CustomerVisitsCollectionId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_CustomerVisitsImport_CustomerVisitsCollections_CustomerVisitsCollectionId",
-                table: "CustomerVisitsImport",
+                name: "FK_CustomerVisitsImports_CustomerVisitsCollections_CustomerVisitsCollectionId",
+                table: "CustomerVisitsImports",
                 column: "CustomerVisitsCollectionId",
                 principalTable: "CustomerVisitsCollections",
                 principalColumn: "Id",

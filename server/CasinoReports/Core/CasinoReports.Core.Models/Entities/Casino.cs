@@ -1,6 +1,5 @@
 ﻿namespace CasinoReports.Core.Models.Entities
 {
-    using System;
     using System.Collections.Generic;
 
     public class Casino : BaseEquatableDeletableEntity<int, Casino>

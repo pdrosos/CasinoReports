@@ -1,6 +1,5 @@
 ﻿namespace CasinoReports.Infrastructure.Data.Abstractions.Repositories
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 

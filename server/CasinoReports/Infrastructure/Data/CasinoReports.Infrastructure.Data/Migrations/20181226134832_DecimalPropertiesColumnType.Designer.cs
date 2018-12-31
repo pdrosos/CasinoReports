@@ -165,7 +165,7 @@ namespace CasinoReports.Infrastructure.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("CasinoManager");
+                    b.ToTable("CasinoManagers");
                 });
 
             modelBuilder.Entity("CasinoReports.Core.Models.Entities.CustomerVisits", b =>
@@ -295,7 +295,7 @@ namespace CasinoReports.Infrastructure.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("CustomerVisitsCollectionCasino");
+                    b.ToTable("CustomerVisitsCollectionCasinos");
                 });
 
             modelBuilder.Entity("CasinoReports.Core.Models.Entities.CustomerVisitsCollectionImport", b =>
@@ -324,7 +324,7 @@ namespace CasinoReports.Infrastructure.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("CustomerVisitsCollectionImport");
+                    b.ToTable("CustomerVisitsCollectionImports");
                 });
 
             modelBuilder.Entity("CasinoReports.Core.Models.Entities.CustomerVisitsCollectionUser", b =>
@@ -353,7 +353,7 @@ namespace CasinoReports.Infrastructure.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("CustomerVisitsCollectionUser");
+                    b.ToTable("CustomerVisitsCollectionUsers");
                 });
 
             modelBuilder.Entity("CasinoReports.Core.Models.Entities.CustomerVisitsImport", b =>
@@ -376,7 +376,7 @@ namespace CasinoReports.Infrastructure.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("CustomerVisitsImport");
+                    b.ToTable("CustomerVisitsImports");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

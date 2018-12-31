@@ -1,9 +1,9 @@
 ﻿namespace CasinoReports.Core.Services.Csv
 {
-    using CasinoReports.Core.Models.Entities;
+    using CasinoReports.Core.Models.Dtos;
     using CsvHelper.Configuration;
 
-    public class CustomerVisitsMap : ClassMap<CustomerVisits>
+    public class CustomerVisitsMap : ClassMap<CustomerVisitsDto>
     {
         private readonly string[] trueValues = { "yes" };
 
@@ -20,6 +20,10 @@
                 .Index(1);
 
             this.Map(m => m.AvgBet)
+                .TypeConverterOption
+                .NullValues(this.nullValues);
+
+            this.Map(m => m.PlayerType)
                 .TypeConverterOption
                 .NullValues(this.nullValues);
 

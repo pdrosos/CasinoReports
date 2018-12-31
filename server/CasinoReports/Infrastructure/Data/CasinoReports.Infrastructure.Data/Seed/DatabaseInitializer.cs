@@ -123,7 +123,7 @@
         {
             if (!applicationDbContext.Casinos.Any() && !applicationDbContext.CustomerVisitsCollections.Any())
             {
-                // create casinos
+                // Create casinos
                 var casino1 = new Casino("Casino 1");
                 var casino2 = new Casino("Casino 2");
                 var casino3 = new Casino("Casino 3");
@@ -136,7 +136,7 @@
                 applicationDbContext.Casinos.AddRange(casinos);
                 applicationDbContext.SaveChanges();
 
-                // create customer visits collections and add casinos to them
+                // Create customer visits collections and add casinos to them
                 var collectionCasino12018 = new CustomerVisitsCollection("Casino 1 2018");
                 collectionCasino12018.AddCustomerVisitsCollectionCasino(
                     new CustomerVisitsCollectionCasino(collectionCasino12018, casino1));
@@ -176,6 +176,68 @@
                 collections.Add(collectionAll2019);
 
                 applicationDbContext.CustomerVisitsCollections.AddRange(collections);
+                applicationDbContext.SaveChanges();
+            }
+
+            // Create casino games
+            if (!applicationDbContext.CasinoGames.Any())
+            {
+                var bj = new CasinoGame("BJ", 1);
+                var roulette = new CasinoGame("Roulette", 2);
+                var slots = new CasinoGame("Slots", 3);
+
+                var casinoGames = new List<CasinoGame>();
+                casinoGames.Add(bj);
+                casinoGames.Add(roulette);
+                casinoGames.Add(slots);
+
+                applicationDbContext.CasinoGames.AddRange(casinoGames);
+                applicationDbContext.SaveChanges();
+            }
+
+            // Create casino player types
+            if (!applicationDbContext.CasinoPlayerTypes.Any())
+            {
+                var newbie = new CasinoPlayerType("Новак", 1);
+                var weak = new CasinoPlayerType("Слаб", 2);
+                var average = new CasinoPlayerType("Среден", 3);
+                var good = new CasinoPlayerType("Хубав", 4);
+                var strong = new CasinoPlayerType("Силен", 5);
+                var special = new CasinoPlayerType("Специален", 6);
+
+                var casinoPlayerTypes = new List<CasinoPlayerType>();
+                casinoPlayerTypes.Add(newbie);
+                casinoPlayerTypes.Add(weak);
+                casinoPlayerTypes.Add(average);
+                casinoPlayerTypes.Add(good);
+                casinoPlayerTypes.Add(strong);
+                casinoPlayerTypes.Add(special);
+
+                applicationDbContext.CasinoPlayerTypes.AddRange(casinoPlayerTypes);
+                applicationDbContext.SaveChanges();
+            }
+
+            // Create customer total bet ranges
+            if (!applicationDbContext.CustomerTotalBetRanges.Any())
+            {
+                var range1 = new CustomerTotalBetRange("0-100", 1);
+                var range2 = new CustomerTotalBetRange("100-500", 2);
+                var range3 = new CustomerTotalBetRange("500-1000", 3);
+                var range4 = new CustomerTotalBetRange("1000-5000", 4);
+                var range5 = new CustomerTotalBetRange("5000-20000", 5);
+                var range6 = new CustomerTotalBetRange("20000-100000", 6);
+                var range7 = new CustomerTotalBetRange("Over 100000", 7);
+
+                var customerTotalBetRanges = new List<CustomerTotalBetRange>();
+                customerTotalBetRanges.Add(range1);
+                customerTotalBetRanges.Add(range2);
+                customerTotalBetRanges.Add(range3);
+                customerTotalBetRanges.Add(range4);
+                customerTotalBetRanges.Add(range5);
+                customerTotalBetRanges.Add(range6);
+                customerTotalBetRanges.Add(range7);
+
+                applicationDbContext.CustomerTotalBetRanges.AddRange(customerTotalBetRanges);
                 applicationDbContext.SaveChanges();
             }
         }

@@ -7,6 +7,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
+    using CasinoReports.Core.Models.Dtos;
     using CasinoReports.Core.Models.Entities;
     using CasinoReports.Core.Services.Abstractions;
     using CasinoReports.Core.Services.Csv;
@@ -71,12 +72,12 @@
                 {
                     using (CsvReader csvReader = CustomerVisitsCsvFactory.CreateReader(streamReader))
                     {
-                        IEnumerable<CustomerVisits> customerVisits = csvReader.GetRecords<CustomerVisits>();
+                        IEnumerable<CustomerVisitsDto> customerVisitsDtos = csvReader.GetRecords<CustomerVisitsDto>();
 
                         await this.customerVisitsImportService.CreateAsync(
                             customerVisitsImportInputModel.Name,
                             customerVisitsImportInputModel.CustomerVisitsCollectionIds,
-                            customerVisits);
+                            customerVisitsDtos);
                     }
                 }
             }

@@ -26,7 +26,25 @@
 
         public DbSet<Casino> Casinos { get; set; }
 
+        public DbSet<CasinoGame> CasinoGames { get; set; }
+
+        public DbSet<CasinoManager> CasinoManagers { get; set; }
+
+        public DbSet<CasinoPlayerType> CasinoPlayerTypes { get; set; }
+
+        public DbSet<CustomerTotalBetRange> CustomerTotalBetRanges { get; set; }
+
+        public DbSet<CustomerVisits> CustomerVisits { get; set; }
+
         public DbSet<CustomerVisitsCollection> CustomerVisitsCollections { get; set; }
+
+        public DbSet<CustomerVisitsCollectionCasino> CustomerVisitsCollectionCasinos { get; set; }
+
+        public DbSet<CustomerVisitsCollectionImport> CustomerVisitsCollectionImports { get; set; }
+
+        public DbSet<CustomerVisitsCollectionUser> CustomerVisitsCollectionUsers { get; set; }
+
+        public DbSet<CustomerVisitsImport> CustomerVisitsImports { get; set; }
 
         public override int SaveChanges()
         {

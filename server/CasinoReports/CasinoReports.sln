@@ -33,6 +33,8 @@ Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "CasinoReports.Analysis.Cust
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Analysis", "Analysis", "{7E1736D9-2F52-4926-B7EA-795903F1A5AD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{DF26169D-41BF-426B-A5EB-599FE8AE1A32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
