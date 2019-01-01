@@ -2,7 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Common;
+    using System.Data.SqlClient;
+    using System.IO;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using CasinoReports.Core.Models.Entities;
 
@@ -10,6 +14,10 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Infrastructure;
     using Microsoft.EntityFrameworkCore.Migrations;
+    using Microsoft.SqlServer.Management.Common;
+    using Microsoft.SqlServer.Management.Smo;
+
+    using ApplicationRole = CasinoReports.Core.Models.Entities.ApplicationRole;
 
     public class DatabaseInitializer
     {
@@ -51,6 +59,24 @@
                 throw new ArgumentNullException(nameof(roleManager));
             }
 
+            // Seed DimDate reporting table
+            if (!TableExists(applicationDbContext, "DimDate").Result)
+            {
+                // Overview (SMO):
+                // https://docs.microsoft.com/en-us/sql/relational-databases/server-management-objects-smo/overview-smo?view=sql-server-2017
+                string connectionString = applicationDbContext.Database.GetDbConnection().ConnectionString;
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    string filePath = Path.Combine(AppContext.BaseDirectory, "Seed", "DimDate.sql");
+                    string seedSql = File.ReadAllText(filePath);
+
+                    // https://docs.microsoft.com/en-us/previous-versions/sql/sql-server-2014/ms199350%28v%3dsql.120%29
+                    Server server = new Server(new ServerConnection(connection));
+                    server.ConnectionContext.ExecuteNonQuery(seedSql);
+                }
+            }
+
+            // Seed application tables
             applicationDbContext.Database.Migrate();
             bool allMigrationsApplied = AllMigrationsApplied(applicationDbContext);
             if (allMigrationsApplied)
@@ -60,6 +86,29 @@
                 SeedData(applicationDbContext);
             }
         }
+
+        private static async Task<bool> TableExists(ApplicationDbContext applicationDbContext, string tableName)
+        {
+            using (DbCommand dbCommand = applicationDbContext.Database.GetDbConnection().CreateCommand())
+            {
+                await applicationDbContext.Database.OpenConnectionAsync();
+
+                dbCommand.CommandText = $"SELECT COUNT(OBJECT_ID('{tableName}', 'U'))";
+                var count = (int)await dbCommand.ExecuteScalarAsync();
+
+                return count > 0;
+            }
+        }
+
+        /*
+        private static bool TableExists(Server server, string tableName)
+        {
+            var sql = $"SELECT COUNT(OBJECT_ID('{tableName}', 'U'))";
+            var count = (int)server.ConnectionContext.ExecuteScalar(sql);
+
+            return count > 0;
+        }
+        */
 
         private static void SeedRoles(
             ApplicationDbContext applicationDbContext,
@@ -76,7 +125,7 @@
 
                 foreach (var role in roles)
                 {
-                    IdentityResult result = roleManager.CreateAsync(role).GetAwaiter().GetResult();
+                    IdentityResult result = roleManager.CreateAsync(role).Result;
                     if (!result.Succeeded)
                     {
                         throw new Exception(string.Join(Environment.NewLine, result.Errors.Select(e => e.Description)));
@@ -252,7 +301,7 @@
             user.Email = email;
             user.EmailConfirmed = true;
 
-            IdentityResult result = userManager.CreateAsync(user, password).GetAwaiter().GetResult();
+            IdentityResult result = userManager.CreateAsync(user, password).Result;
             if (!result.Succeeded)
             {
                 throw new Exception(string.Join(Environment.NewLine, result.Errors.Select(e => e.Description)));
@@ -266,7 +315,7 @@
             ApplicationUser user,
             string role)
         {
-            IdentityResult result = userManager.AddToRoleAsync(user, role).GetAwaiter().GetResult();
+            IdentityResult result = userManager.AddToRoleAsync(user, role).Result;
             if (!result.Succeeded)
             {
                 throw new Exception(string.Join(Environment.NewLine, result.Errors.Select(e => e.Description)));
