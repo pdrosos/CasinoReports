@@ -20,6 +20,8 @@
     <PackageReference Include="CsvHelper" Version="12.1.0" />
     <PackageReference Include="IdentityServer4.AspNetIdentity" Version="2.3.0" />
     <PackageReference Include="IdentityServer4.EntityFramework" Version="2.3.2" />
+    <PackageReference Include="Microsoft.AnalysisServices.AdomdClient.retail.amd64" Version="15.8.0" />
+    <PackageReference Include="Microsoft.AnalysisServices.retail.amd64" Version="15.8.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Api.Analyzers" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
@@ -41,7 +43,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Flexmonster.Accelerator.Core">
+      <HintPath>..\Flexmonster.Accelerator.Core\Flexmonster.Accelerator.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="flexmonster.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

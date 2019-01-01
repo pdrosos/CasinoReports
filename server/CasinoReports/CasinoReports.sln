@@ -10,6 +10,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{EBC81B2D-9B33-48A5-8C79-3D644EF03E0D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{92B7CCB5-5B13-453C-86D7-C1B009C78B90}"
+	ProjectSection(SolutionItems) = preProject
+		Web\Flexmonster.Accelerator.Core\Flexmonster.Accelerator.Core.dll = Web\Flexmonster.Accelerator.Core\Flexmonster.Accelerator.Core.dll
+		Web\Flexmonster.Accelerator.Core\flexmonster.config = Web\Flexmonster.Accelerator.Core\flexmonster.config
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CasinoReports.Infrastructure.Data", "Infrastructure\Data\CasinoReports.Infrastructure.Data\CasinoReports.Infrastructure.Data.csproj", "{4048F34E-0D96-4A94-AE02-BA03103EDD90}"
 EndProject
@@ -32,6 +36,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Report", "Report", "{DF26169D-41BF-426B-A5EB-599FE8AE1A32}"
 EndProject
 Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "CasinoReports.Report.CustomerVisits", "Report\CasinoReports.Report.CustomerVisits\CasinoReports.Report.CustomerVisits.smproj", "{D57E7B44-8462-43DC-A0C0-02117A8DFEA4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Flexmonster.Accelerator.Core", "Flexmonster.Accelerator.Core", "{71511E49-1D4E-4B71-A9B0-B2A566DCBF1E}"
+	ProjectSection(SolutionItems) = preProject
+		Web\Flexmonster.Accelerator.Core\Flexmonster.Accelerator.Core.dll = Web\Flexmonster.Accelerator.Core\Flexmonster.Accelerator.Core.dll
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -183,6 +192,7 @@ Global
 		{4A78A00D-43D7-4050-961B-081909D02DA3} = {B07A8DBF-00E2-4A97-88A2-59BBDEF0AA5D}
 		{843A37A8-3B0C-47EB-9737-2B6A479604D5} = {B07A8DBF-00E2-4A97-88A2-59BBDEF0AA5D}
 		{D57E7B44-8462-43DC-A0C0-02117A8DFEA4} = {DF26169D-41BF-426B-A5EB-599FE8AE1A32}
+		{71511E49-1D4E-4B71-A9B0-B2A566DCBF1E} = {92B7CCB5-5B13-453C-86D7-C1B009C78B90}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7F3FFD29-7C38-4E90-A775-D4F7E86AF4EC}
