@@ -1556,15 +1556,15 @@
             "expression": "SUM([Visits])"
           },
           {
-            "name": "Average of Avg Bet",
+            "name": "Avg of Avg Bet",
             "expression": "AVERAGE([Avg Bet])"
           },
           {
-            "name": "Maximum of Visits",
+            "name": "Max of Visits",
             "expression": "MAX([Visits])"
           },
           {
-            "name": "Minimum of Visits",
+            "name": "Min of Visits",
             "expression": "MIN([Visits])"
           },
           {
@@ -1572,11 +1572,11 @@
             "expression": "SUM([Total Bet])"
           },
           {
-            "name": "Maximum of Total Bet",
+            "name": "Max of Total Bet",
             "expression": "MAX([Total Bet])"
           },
           {
-            "name": "Minimum of Total Bet",
+            "name": "Min of Total Bet",
             "expression": "MIN([Total Bet])"
           },
           {
@@ -1584,19 +1584,19 @@
             "expression": "SUM([Bonus])"
           },
           {
-            "name": "Maximum of Bonus",
+            "name": "Max of Bonus",
             "expression": "MAX([Bonus])"
           },
           {
-            "name": "Minimum of Bonus",
+            "name": "Min of Bonus",
             "expression": "MIN([Bonus])"
           },
           {
-            "name": "Average of Visits",
+            "name": "Avg of Visits",
             "expression": "AVERAGE([Visits])"
           },
           {
-            "name": "Average of Bonus",
+            "name": "Avg of Bonus",
             "expression": "AVERAGE([Bonus])"
           },
           {
@@ -1604,15 +1604,15 @@
             "expression": "SUM([Avg Bet])"
           },
           {
-            "name": "Maximum of Avg Bet",
+            "name": "Max of Avg Bet",
             "expression": "MAX([Avg Bet])"
           },
           {
-            "name": "Minimum of Avg Bet",
+            "name": "Min of Avg Bet",
             "expression": "MIN([Avg Bet])"
           },
           {
-            "name": "Average of Total Bet",
+            "name": "Avg of Total Bet",
             "expression": "AVERAGE([Total Bet])"
           },
           {
@@ -1620,15 +1620,15 @@
             "expression": "SUM([Balance])"
           },
           {
-            "name": "Average of Balance",
+            "name": "Avg of Balance",
             "expression": "AVERAGE([Balance])"
           },
           {
-            "name": "Minimum of Balance",
+            "name": "Min of Balance",
             "expression": "MIN([Balance])"
           },
           {
-            "name": "Maximum of Balance",
+            "name": "Max of Balance",
             "expression": "MAX([Balance])"
           },
           {
@@ -1636,15 +1636,15 @@
             "expression": "SUM([Bonus From Points])"
           },
           {
-            "name": "Average of Bonus From Points",
+            "name": "Avg of Bonus From Points",
             "expression": "AVERAGE([Bonus From Points])"
           },
           {
-            "name": "Minimum of Bonus From Points",
+            "name": "Min of Bonus From Points",
             "expression": "MIN([Bonus From Points])"
           },
           {
-            "name": "Maximum of Bonus From Points",
+            "name": "Max of Bonus From Points",
             "expression": "MAX([Bonus From Points])"
           },
           {
@@ -1652,15 +1652,15 @@
             "expression": "SUM([Total Bonuses])"
           },
           {
-            "name": "Average of Total Bonuses",
+            "name": "Avg of Total Bonuses",
             "expression": "AVERAGE([Total Bonuses])"
           },
           {
-            "name": "Minimum of Total Bonuses",
+            "name": "Min of Total Bonuses",
             "expression": "MIN([Total Bonuses])"
           },
           {
-            "name": "Maximum of Total Bonuses",
+            "name": "Max of Total Bonuses",
             "expression": "MAX([Total Bonuses])"
           },
           {
@@ -1668,15 +1668,15 @@
             "expression": "SUM([Match Pay])"
           },
           {
-            "name": "Average of Match Pay",
+            "name": "Avg of Match Pay",
             "expression": "AVERAGE([Match Pay])"
           },
           {
-            "name": "Minimum of Match Pay",
+            "name": "Min of Match Pay",
             "expression": "MIN([Match Pay])"
           },
           {
-            "name": "Maximum of Match Pay",
+            "name": "Max of Match Pay",
             "expression": "MAX([Match Pay])"
           },
           {
@@ -1684,15 +1684,15 @@
             "expression": "SUM([Tombola Game])"
           },
           {
-            "name": "Average of Tombola Game",
+            "name": "Avg of Tombola Game",
             "expression": "AVERAGE([Tombola Game])"
           },
           {
-            "name": "Minimum of Tombola Game",
+            "name": "Min of Tombola Game",
             "expression": "MIN([Tombola Game])"
           },
           {
-            "name": "Maximum of Tombola Game",
+            "name": "Max of Tombola Game",
             "expression": "MAX([Tombola Game])"
           },
           {
@@ -1700,39 +1700,39 @@
             "expression": "SUM([Clean Balance])"
           },
           {
-            "name": "Average of Clean Balance",
+            "name": "Avg of Clean Balance",
             "expression": "AVERAGE([Clean Balance])"
           },
           {
-            "name": "Minimum of Clean Balance",
+            "name": "Min of Clean Balance",
             "expression": "MIN([Clean Balance])"
           },
           {
-            "name": "Maximum of Clean Balance",
+            "name": "Max of Clean Balance",
             "expression": "MAX([Clean Balance])"
           },
           {
-            "name": "Average of Bonus Percent of Bet",
+            "name": "Avg of Bonus Percent of Bet",
             "expression": "AVERAGE([Bonus Percent of Bet])"
           },
           {
-            "name": "Minimum of Bonus Percent of Bet",
+            "name": "Min of Bonus Percent of Bet",
             "expression": "MIN([Bonus Percent of Bet])"
           },
           {
-            "name": "Maximum of Bonus Percent of Bet",
+            "name": "Max of Bonus Percent of Bet",
             "expression": "MAX([Bonus Percent of Bet])"
           },
           {
-            "name": "Average of Bonus Percent of Lose",
+            "name": "Avg of Bonus Percent of Lose",
             "expression": "AVERAGE([Bonus Percent of Lose])"
           },
           {
-            "name": "Minimum of Bonus Percent of Lose",
+            "name": "Min of Bonus Percent of Lose",
             "expression": "MIN([Bonus Percent of Lose])"
           },
           {
-            "name": "Maximum of Bonus Percent of Lose",
+            "name": "Max of Bonus Percent of Lose",
             "expression": "MAX([Bonus Percent of Lose])"
           },
           {

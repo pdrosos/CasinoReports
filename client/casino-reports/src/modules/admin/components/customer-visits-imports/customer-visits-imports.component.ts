@@ -39,7 +39,7 @@ export class CustomerVisitsImportsDataSource extends MatTableDataSource<Customer
 })
 export class CustomerVisitsImportsComponent implements OnInit {
   public dataSource: CustomerVisitsImportsDataSource;
-  public columnsToDisplay = ['name', 'collection', 'createdOn', 'actions'];
+  public columnsToDisplay = ['name', 'collections', 'createdOn', 'actions'];
 
   public constructor(private customerVisitsImportService: CustomerVisitsImportService) {
   }

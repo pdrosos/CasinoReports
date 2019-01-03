@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  casinoreports.web.flexmonsterapi:
+    image: ${DOCKER_REGISTRY-}casinoreportswebflexmonsterapi
+    build:
+      context: .\Web\CasinoReports.Web.FlexmonsterApi
+      dockerfile: Dockerfile

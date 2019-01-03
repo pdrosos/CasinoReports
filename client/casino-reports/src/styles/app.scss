@@ -81,6 +81,15 @@ body {
   }
 }
 
+.pivot-card-container {
+  display: flex;
+  justify-content: center;
+
+  mat-card {
+    min-width: 1200px;
+  }
+}
+
 .account-card-container {
   display: flex;
   justify-content: center;

@@ -14,6 +14,7 @@ import { CustomerVisitsReportsComponent } from '@admin/components/customer-visit
 import { CustomerVisitsReportComponent } from '@admin/components/customer-visits-report/customer-visits-report.component';
 import { CustomerVisitsCollectionService } from '@admin/services/customer-visits-collection.service';
 import { CustomerVisitsImportService } from '@admin/services/customer-visits-import.service';
+import { CustomerVisitsReportService } from '@admin/services/customer-visits-report.service';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { CustomerVisitsImportService } from '@admin/services/customer-visits-imp
     { provide: moduleConfigToken, useValue: moduleConfig },
     CustomerVisitsCollectionService,
     CustomerVisitsImportService,
+    CustomerVisitsReportService,
   ],
 })
 
