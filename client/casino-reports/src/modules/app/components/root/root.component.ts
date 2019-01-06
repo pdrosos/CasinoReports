@@ -11,6 +11,6 @@ export class RootComponent implements OnInit {
     this.authenticationService.configure();
   }
 
-  ngOnInit() {
+  public ngOnInit() {
   }
 }
