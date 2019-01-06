@@ -41,23 +41,23 @@ export class CustomerVisitsReportViewComponent implements OnInit {
         const report = customerVisitsReport.settings;
 
         if (!report.hasOwnProperty('options')) {
-          report.options = {};
+          report['options'] = {};
         }
 
-        report.options.configuratorActive = false;
-        report.options.configuratorButton = false;
+        report['options'].configuratorActive = false;
+        report['options'].configuratorButton = false;
 
-        if (!report.options.hasOwnProperty('grid')) {
-          report.options.grid = {};
+        if (!report['options'].hasOwnProperty('grid')) {
+          report['options'].grid = {};
         }
 
-        report.options.grid.showFilter = false;
+        report['options'].grid.showFilter = false;
 
-        if (!report.options.hasOwnProperty('chart')) {
-          report.options.chart = {};
+        if (!report['options'].hasOwnProperty('chart')) {
+          report['options'].chart = {};
         }
 
-        report.options.chart.showFilter = false;
+        report['options'].chart.showFilter = false;
 
         this.pivot.flexmonster.setReport(report);
       },
