@@ -10,7 +10,7 @@ Customer visits CSV import can be added to multiple Customer visits collections.
 
 ### Casino Reports Identity Server, API and SSAS Tabular Model
 
-This application is [IdentityServer4](https://identityserver4.readthedocs.io/en/latest/) OpenID Connect and OAuth 2.0 server + Casino Reports REST API for the [Angular client](./client/casino-reports), built with:
+This application is [IdentityServer4](https://identityserver4.readthedocs.io/en/latest/) OpenID Connect and OAuth 2.0 server, and Casino Reports REST API for the [Angular client](./client/casino-reports), developed with:
 
 - [.NET Core 2.2](https://dotnet.microsoft.com/download)
 - [ASP.NET Core 2.2](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-2.2)
@@ -33,7 +33,7 @@ The application runs on https://localhost:44300. The SQL Server relational datab
 
 Flexmonster has backend [Accelerator](https://www.flexmonster.com/doc/getting-started-with-accelerator-ssas/), which takes over and speeds up the communication of the JavaScript component with SQL Server Analysis Services (SSAS) and [can be included in your backend application](https://www.flexmonster.com/doc/referring-accelerator-as-a-dll/), when you need application level authentication and authorization (Flexmonster JavaScript component support of custom Authorization Header on each request is comming soon).
 
-The Flexmonster Accelerator API is [.NET 4.7.2](https://dotnet.microsoft.com/download/visual-studio-sdks) application (no current support of .NET Core) is used by the Flexmonster JavaScript component for communication with SSAS. The application runs on http://localhost:54998/api/Accelerator/
+The Flexmonster Accelerator API is [.NET 4.7.2](https://dotnet.microsoft.com/download/visual-studio-sdks) application (no current support of .NET Core) and is used by the Flexmonster JavaScript component for communication with SSAS. The API runs on http://localhost:54998/api/Accelerator/
 
 ## Angular Client
 
