@@ -15,8 +15,6 @@ export class CustomerVisitsReportService {
   }
 
   public getAll(): Observable<CustomerVisitsReport[]> {
-    return of([]);
-
     return this.httpClient.get<CustomerVisitsReport[]>(this.baseResourceUrl)
       .pipe(map((data) => {
         let items = [];
@@ -30,7 +28,28 @@ export class CustomerVisitsReportService {
       }));
   }
 
-  public create(formData: FormData): Observable<object> {
-    return this.httpClient.post(this.baseResourceUrl, formData);
+  public getById(id: number): Observable<CustomerVisitsReport> {
+    const url = `${this.baseResourceUrl}/${id}`;
+
+    return this.httpClient.get<CustomerVisitsReport>(url)
+      .pipe(map((item) => {
+        return new CustomerVisitsReport(item);
+      }));
+  }
+
+  public create(customerVisitsReport: CustomerVisitsReport): Observable<any> {
+    return this.httpClient.post(this.baseResourceUrl, customerVisitsReport);
+  }
+
+  public update(id: number, customerVisitsReport: CustomerVisitsReport): Observable<any> {
+    const url = `${this.baseResourceUrl}/${id}`;
+
+    return this.httpClient.put(url, customerVisitsReport);
+  }
+
+  public delete(id: number): Observable<any> {
+    const url = `${this.baseResourceUrl}/${id}`;
+
+    return this.httpClient.delete(url);
   }
 }

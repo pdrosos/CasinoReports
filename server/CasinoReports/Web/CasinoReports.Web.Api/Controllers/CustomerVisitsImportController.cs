@@ -42,17 +42,17 @@
 
             // todo: probably use Automapper
             IEnumerable<CustomerVisitsImportViewModel> viewModel =
-                customerVisitsImports.Select(c => new CustomerVisitsImportViewModel
+                customerVisitsImports.Select(i => new CustomerVisitsImportViewModel
                 {
-                    Id = c.Id,
-                    Name = c.Name,
-                    Collections = c.CustomerVisitsCollectionImports.Select(ci => new CustomerVisitsCollectionViewModel
+                    Id = i.Id,
+                    Name = i.Name,
+                    Collections = i.CustomerVisitsCollectionImports.Select(ci => new CustomerVisitsCollectionViewModel
                     {
                         Id = ci.CustomerVisitsCollection.Id,
                         Name = ci.CustomerVisitsCollection.Name,
                         CreatedOn = ci.CustomerVisitsCollection.CreatedOn,
                     }),
-                    CreatedOn = c.CreatedOn.ToLocalTime(),
+                    CreatedOn = i.CreatedOn.ToLocalTime(),
                 });
 
             return this.Ok(viewModel);

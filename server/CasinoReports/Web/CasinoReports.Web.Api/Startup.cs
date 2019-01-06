@@ -156,7 +156,7 @@
 
             IConfigurationSection corsOriginsConfigurationSection = this.Configuration.GetSection("Cors:Origins");
             string[] corsOrigins = corsOriginsConfigurationSection.GetChildren().ToArray().Select(c => c.Value).ToArray();
-            app.UseCors(builder => builder.WithOrigins(corsOrigins).AllowAnyHeader());
+            app.UseCors(builder => builder.WithOrigins(corsOrigins).AllowAnyHeader().AllowAnyMethod());
 
             app.UseMvc(routes =>
             {

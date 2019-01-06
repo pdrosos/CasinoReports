@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>
+  Delete item
+</h2>
+<mat-dialog-content>
+  Are you sure you want to delete this item?
+</mat-dialog-content>
+<mat-dialog-actions>
+  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+  <button mat-button color="warn" [mat-dialog-close]="true">
+    Yes
+  </button>
+  <button mat-button mat-dialog-close>
+    No
+  </button>
+</mat-dialog-actions>

@@ -1,2 +1,4 @@
 # CasinoReports
-Project for creating casino data reports
+
+Project for creating casino customer visits reports
+

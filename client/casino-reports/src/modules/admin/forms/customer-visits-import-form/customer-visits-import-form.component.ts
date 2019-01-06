@@ -29,7 +29,7 @@ export class CustomerVisitsImportFormComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      'customerVisitsCollectionIds': [
+      customerVisitsCollectionIds: [
         '',
         [Validators.required],
       ],

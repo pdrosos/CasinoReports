@@ -28,7 +28,7 @@ export class CustomerVisitsImportService {
       }));
   }
 
-  public create(formData: FormData): Observable<object> {
+  public create(formData: FormData): Observable<any> {
     return this.httpClient.post(this.baseResourceUrl, formData);
   }
 }

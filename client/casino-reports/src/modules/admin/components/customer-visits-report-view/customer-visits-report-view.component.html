@@ -1,0 +1,17 @@
+<h1 *ngIf="customerVisitsReport">{{ customerVisitsReport.name }}</h1>
+
+<div class="pivot-card-container">
+  <mat-card>
+    <mat-card-content>
+      <fm-pivot #pivot
+                [licenseKey]="licenseKey"
+                [toolbar]="true"
+                [width]="'100%'"
+                [height]="800"
+                [report]="{}"
+                (ready)="onFlexmonsterReady($event)"
+                (beforetoolbarcreated)="onBeforeToolbarCreated($event)">
+      </fm-pivot>
+    </mat-card-content>
+  </mat-card>
+</div>

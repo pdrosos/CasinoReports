@@ -1,0 +1,33 @@
+<form name="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <mat-form-field class="full-width">
+      <input type="text" matInput formControlName="name" name="name" placeholder="Name *">
+      <mat-error *ngIf="form.get('name').hasError('required')">
+        Name is required
+      </mat-error>
+      <mat-error *ngIf="form.get('name').hasError('minlength')">
+        Name must be at least
+        {{ form.get('name').getError('minlength').requiredLength }}
+        symbols
+      </mat-error>
+    </mat-form-field>
+
+    <div *ngIf="(serverErrors$ | async).length > 0" class="has-error">
+      <div *ngFor="let error of serverErrors$ | async">
+        <small>{{ error }}</small>
+      </div>
+      <br>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary" type="submit" [disabled]="(saving$ | async)">
+      Save
+    </button>
+    <button mat-raised-button (click)="onCancel()" [disabled]="(saving$ | async)">
+      Cancel
+    </button>
+  </mat-dialog-actions>
+  <div *ngIf="(saving$ | async)">
+    <mat-spinner></mat-spinner>
+  </div>
+</form>

@@ -11,6 +11,7 @@ import { CustomerVisitsImportsComponent } from '@admin/components/customer-visit
 import { CustomerVisitsImportComponent } from '@admin/components/customer-visits-import/customer-visits-import.component';
 import { CustomerVisitsReportsComponent } from '@admin/components/customer-visits-reports/customer-visits-reports.component';
 import { CustomerVisitsReportComponent } from '@admin/components/customer-visits-report/customer-visits-report.component';
+import { CustomerVisitsReportViewComponent } from '@admin/components/customer-visits-report-view/customer-visits-report-view.component';
 
 const adminRoutes = [
   {
@@ -53,6 +54,14 @@ const adminRoutes = [
           {
             path: 'new',
             component: CustomerVisitsReportComponent,
+          },
+          {
+            path: 'edit/:id',
+            component: CustomerVisitsReportComponent,
+          },
+          {
+            path: 'view/:id',
+            component: CustomerVisitsReportViewComponent,
           }
         ]
       },

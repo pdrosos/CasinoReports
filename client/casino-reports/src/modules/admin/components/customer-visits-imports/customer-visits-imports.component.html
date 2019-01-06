@@ -23,10 +23,10 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> </th>
     <td mat-cell *matCellDef="let row">
-      <button mat-icon-button color="warn" (click)="edit(row.id)" disabled>
+      <a mat-icon-button [routerLink]="['edit', row.id]" color="primary" title="Edit" disabled>
         <mat-icon>edit</mat-icon>
-      </button>
-      <button mat-icon-button color="warn" (click)="delete(row.id)" disabled>
+      </a>
+      <button mat-icon-button color="warn" (click)="delete(row.id)" title="Delete" disabled>
         <mat-icon>delete</mat-icon>
       </button>
     </td>

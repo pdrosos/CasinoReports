@@ -16,11 +16,9 @@ import { CustomerVisitsImportService } from '@admin/services/customer-visits-imp
 })
 export class CustomerVisitsImportComponent implements OnInit {
   public customerVisitsCollections$: Observable<CustomerVisitsCollection[]>;
-
   public maxFileSize: number;
 
   private uploading: BehaviorSubject<boolean>;
-
   private serverErrors: BehaviorSubject<string[]>;
 
   public constructor(
@@ -56,32 +54,34 @@ export class CustomerVisitsImportComponent implements OnInit {
         this.uploading.next(false);
       }))
       .subscribe(
-        () => {
-          const snackBarRef = this.snackBar.open('Import completed', '', {
-            duration: 2000,
-          });
-          snackBarRef.afterDismissed().subscribe(() => {
-            this.router.navigate(['/admin/customer-visits-imports']);
-          });
-        },
-        (error: ServerError) => {
-          if (error.status !== 400 || !error.hasOwnProperty('error')) {
-            this.serverErrors.next(
-              [...this.serverErrors.getValue(),
-                'Server error occurred. Please try again later.']);
-
-            return;
-          }
-
-          for (const field in error.error.errors) {
-            if (!error.error.errors.hasOwnProperty(field)) {
-              continue;
-            }
-
-            error.error.errors[field].forEach((err) => {
-              this.serverErrors.next([...this.serverErrors.getValue(), err]);
-            });
-          }
+      () => {
+        this.snackBar.open('Import completed.', '', {
+          duration: 3000,
         });
+        this.router.navigate(['/admin/customer-visits-imports']);
+      },
+      (error: ServerError) => {
+        this.handleServerError(error);
+      });
+  }
+
+  private handleServerError(error: ServerError) {
+    if (error.status !== 400 || !error.hasOwnProperty('error')) {
+      this.serverErrors.next(
+        [...this.serverErrors.getValue(),
+        'Server error occurred. Please try again later.']);
+
+      return;
+    }
+
+    for (const field in error.error.errors) {
+      if (!error.error.errors.hasOwnProperty(field)) {
+        continue;
+      }
+
+      error.error.errors[field].forEach((err) => {
+        this.serverErrors.next([...this.serverErrors.getValue(), err]);
+      });
+    }
   }
 }

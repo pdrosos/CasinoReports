@@ -2,6 +2,7 @@ import { InjectionToken } from '@angular/core';
 
 export interface IModuleConfig {
   flexmonster: {
+    licenseKey: string,
     apiUrl: string,
     catalog: string,
     cube: string,
@@ -13,6 +14,7 @@ export interface IModuleConfig {
 
 export const moduleConfig: IModuleConfig = {
   flexmonster: {
+    licenseKey: 'Z7VT-XD5J38-1Y275T-6S1K4T',
     apiUrl: 'http://localhost:54998/api/Accelerator/',
     catalog: 'CasinoReportsReportCustomerVisits',
     cube: 'CustomerVisits',

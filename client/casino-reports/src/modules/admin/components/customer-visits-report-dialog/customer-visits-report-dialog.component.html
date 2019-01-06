@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Save Report</h2>
+
+<app-customer-visits-report-form [customerVisitsReport]="customerVisitsReport"
+                                 [saving$]="saving$"
+                                 [serverErrors$]="serverErrors$"
+                                 (formSubmit)="onSubmit($event)"
+                                 (formCancel)="onCancel($event)">
+</app-customer-visits-report-form>

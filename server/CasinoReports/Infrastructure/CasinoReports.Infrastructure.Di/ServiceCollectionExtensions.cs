@@ -40,13 +40,14 @@
             services.AddScoped(typeof(ICustomerTotalBetRangeRepository), typeof(CustomerTotalBetRangeRepository));
             services.AddScoped(typeof(ICustomerVisitsCollectionRepository), typeof(CustomerVisitsCollectionRepository));
             services.AddScoped(typeof(ICustomerVisitsImportRepository), typeof(CustomerVisitsImportRepository));
-
-            services.AddScoped(typeof(ICustomerVisitsCollectionService), typeof(CustomerVisitsCollectionService));
-            services.AddScoped(typeof(ICustomerVisitsImportService), typeof(CustomerVisitsImportService));
+            services.AddScoped(typeof(ICustomerVisitsReportRepository), typeof(CustomerVisitsReportRepository));
         }
 
         private static void BindServices(IServiceCollection services)
         {
+            services.AddScoped(typeof(ICustomerVisitsCollectionService), typeof(CustomerVisitsCollectionService));
+            services.AddScoped(typeof(ICustomerVisitsImportService), typeof(CustomerVisitsImportService));
+            services.AddScoped(typeof(ICustomerVisitsReportService), typeof(CustomerVisitsReportService));
         }
     }
 }

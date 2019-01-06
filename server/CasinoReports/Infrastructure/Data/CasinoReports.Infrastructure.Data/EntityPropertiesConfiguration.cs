@@ -2,7 +2,11 @@
 {
     using System.Linq;
 
+    using CasinoReports.Core.Models.Entities;
+
     using Microsoft.EntityFrameworkCore;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
 
     internal class EntityPropertiesConfiguration
     {
@@ -17,6 +21,13 @@
                     property.Relational().ColumnType = "decimal(22, 10)";
                 }
             }
+
+            modelBuilder.Entity<CustomerVisitsReport>()
+                .Property(r => r.Settings)
+                .HasColumnType("ntext")
+                .HasConversion(
+                    s => JsonConvert.SerializeObject(s),
+                    s => JsonConvert.DeserializeObject<JObject>(string.IsNullOrEmpty(s) ? "{}" : s));
         }
     }
 }

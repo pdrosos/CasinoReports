@@ -12,10 +12,15 @@ import { CustomerVisitsImportComponent } from '@admin/components/customer-visits
 import { CustomerVisitsImportFormComponent } from '@admin/forms/customer-visits-import-form/customer-visits-import-form.component';
 import { CustomerVisitsReportsComponent } from '@admin/components/customer-visits-reports/customer-visits-reports.component';
 import { CustomerVisitsReportComponent } from '@admin/components/customer-visits-report/customer-visits-report.component';
+import { CustomerVisitsReportViewComponent } from './components/customer-visits-report-view/customer-visits-report-view.component';
+import {
+  CustomerVisitsReportDialogComponent
+} from '@admin/components/customer-visits-report-dialog/customer-visits-report-dialog.component';
+import { CustomerVisitsReportFormComponent } from '@admin/forms/customer-visits-report-form/customer-visits-report-form.component';
+import { DeleteItemDialogComponent } from './components/delete-item-dialog/delete-item-dialog.component';
 import { CustomerVisitsCollectionService } from '@admin/services/customer-visits-collection.service';
 import { CustomerVisitsImportService } from '@admin/services/customer-visits-import.service';
 import { CustomerVisitsReportService } from '@admin/services/customer-visits-report.service';
-
 
 @NgModule({
   declarations: [
@@ -24,8 +29,16 @@ import { CustomerVisitsReportService } from '@admin/services/customer-visits-rep
     CustomerVisitsImportsComponent,
     CustomerVisitsImportComponent,
     CustomerVisitsImportFormComponent,
-    CustomerVisitsReportComponent,
     CustomerVisitsReportsComponent,
+    CustomerVisitsReportComponent,
+    CustomerVisitsReportViewComponent,
+    CustomerVisitsReportDialogComponent,
+    CustomerVisitsReportFormComponent,
+    DeleteItemDialogComponent,
+  ],
+  entryComponents: [
+    CustomerVisitsReportDialogComponent,
+    DeleteItemDialogComponent,
   ],
   imports: [
     SharedModule,

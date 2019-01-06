@@ -46,6 +46,8 @@
 
         public DbSet<CustomerVisitsImport> CustomerVisitsImports { get; set; }
 
+        public DbSet<CustomerVisitsReport> CustomerVisitsReports { get; set; }
+
         public override int SaveChanges()
         {
             return this.SaveChanges(true);
