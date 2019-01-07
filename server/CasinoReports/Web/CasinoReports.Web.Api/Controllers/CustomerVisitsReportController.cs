@@ -1,6 +1,5 @@
 ﻿namespace CasinoReports.Web.Api.Controllers
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -77,7 +76,7 @@
         [Consumes("application/json")]
         [Produces("application/json", "application/problem+json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> Post([FromBody]CustomerVisitsReportInputModel customerVisitsReportInputModel)
+        public async Task<IActionResult> Post(CustomerVisitsReportInputModel customerVisitsReportInputModel)
         {
             var customerVisitsReport = new CustomerVisitsReport(
                 customerVisitsReportInputModel.Name,
@@ -94,7 +93,7 @@
         [Produces("application/json", "application/problem+json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Put(int id, [FromBody]CustomerVisitsReportInputModel customerVisitsReportInputModel)
+        public async Task<IActionResult> Put(int id, CustomerVisitsReportInputModel customerVisitsReportInputModel)
         {
             var customerVisitsReport = await this.customerVisitsReportRepository.GetByIdAsync(id);
             if (customerVisitsReport == null)
